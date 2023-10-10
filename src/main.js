@@ -2,7 +2,8 @@
 
 // import { myFunction } from './lib/index.js';
 import { renderWelcome } from './welcome.js';
-import { login, logout } from './auth.js';
+import { db } from "./firebase.js";
+console.log(db);
 
 const root = document.querySelector('#root');
 // const [inputUser, inputPwd, loginButton, registerButton] = renderWelcome();
