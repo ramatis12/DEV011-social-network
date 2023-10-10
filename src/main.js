@@ -3,6 +3,8 @@
 // import { myFunction } from './lib/index.js';
 import { renderWelcome } from './welcome.js';
 import { db } from "./firebase.js";
+import { createUserWithEmailAndPassword, auth } from './auth.js';
+
 console.log(db);
 
 const root = document.querySelector('#root');
@@ -17,10 +19,9 @@ root.appendChild(renderWelcome());
 
 const buttonLogin = document.querySelector('.login-button');
 
-buttonLogin.addEventListener('click', async (e) => {
-  try {
-    await login();
-  } catch (error){}
+buttonLogin.addEventListener('submit', (e) => {
+  
+  createUserWithEmailAndPassword()
 });
 
 // root.appendChild

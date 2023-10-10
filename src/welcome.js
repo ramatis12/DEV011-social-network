@@ -1,6 +1,8 @@
 export const renderWelcome = () => {
-  const welcome = document.createElement('div');
+  const welcome = document.createElement('form');
   welcome.setAttribute('id', 'welcome');
+  welcome.setAttribute('method', 'post');
+
 
   const inputUser = document.createElement('input');
   inputUser.setAttribute('type', 'email');
@@ -18,11 +20,13 @@ export const renderWelcome = () => {
 
   const loginButton = document.createElement('button');
   loginButton.setAttribute('class', 'login-button');
+  loginButton.setAttribute('type', 'submit');
   loginButton.textContent = 'Iniciar sesión';
   welcome.appendChild(loginButton);
 
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button');
+  registerButton.setAttribute('type', 'submit');
   registerButton.textContent = 'Registrar';
   welcome.appendChild(registerButton);
   //   console.log(registerButton);
