@@ -32,8 +32,8 @@ const password = document.querySelector('.input-pwd').value;
 console.log (password);
 
 createUserWithEmailAndPassword(auth, email, password)
-.then((currentUser) => {
-        const user = currentUser.user;
+.then((userCredential) => {
+        const user = userCredential.user;
         alert("Usuario creado" + user);
     })
     .catch((error) => {
