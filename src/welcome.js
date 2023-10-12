@@ -23,13 +23,13 @@ export const renderWelcome = () => {
   const loginButton = document.createElement('button');
   loginButton.setAttribute('class', 'login-button');
   //loginButton.setAttribute('type', 'submit');
-  loginButton.textContent = 'Iniciar sesión';
+  loginButton.textContent = 'Ingresar';
   welcome.appendChild(loginButton);
 
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button');
   //registerButton.setAttribute('type', 'submit');
-  registerButton.textContent = 'Registrar';
+  registerButton.textContent = 'Registrarse';
   welcome.appendChild(registerButton);
   //   console.log(registerButton);
 
