@@ -11,6 +11,10 @@ header{
     margin: 0 0 15% 0;
 }
 
+#root{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
 body{
     background-image: url('./imgs/background.jpg');
     background-size: cover;
@@ -18,15 +22,9 @@ body{
 
 footer{
     background-color: #0BC04B;
+    color: beige;
     height: 50px;
-    /* position: absolute;
-    bottom: 0%; */
-    
-    /* Footer en el bottom siempre, pero cubre contenido */
-    /* position: fixed;
-    bottom: 0;
-    left: 0; */
-
+    font-family: sans-serif;
     margin: 20% 0 0 0;
     width: 100%;
     font-size: 12px;
@@ -41,7 +39,6 @@ footer{
     bottom: 0;
     left: 0;
     margin: 0;
-    overflow-x: hidden;
     }
   }
 /* Estilo de formulario login */
