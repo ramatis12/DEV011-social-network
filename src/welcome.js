@@ -45,5 +45,17 @@ export const renderWelcome = () => {
   divWelcome.appendChild(registerButton);
   //   console.log(registerButton);
 
+  const googleRegisterButton = document.createElement('button');
+  googleRegisterButton.setAttribute('class', 'google-register-button');
+  const googleIcon = document.createElement('img');
+  googleIcon.setAttribute('class', 'google-icon');
+  googleIcon.src = './imgs/google.png';
+  const text = document.createTextNode(' Continuar con Google');
+  googleRegisterButton.appendChild(googleIcon);
+  googleRegisterButton.appendChild(text);
+  divWelcome.appendChild(googleRegisterButton);
+
+  // console.log(googleRegisterButton);
+
   return divWelcome;
 };
