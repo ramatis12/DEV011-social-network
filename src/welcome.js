@@ -1,15 +1,17 @@
 export const renderWelcome = () => {
+  const divWelcome = document.createElement('div');
+  divWelcome.setAttribute('id', 'div-welcome');
+
   const welcome = document.createElement('form');
   welcome.setAttribute('id', 'welcome');
   welcome.setAttribute('method', 'GET');
-
+  divWelcome.appendChild(welcome);
 
   const inputUser = document.createElement('input');
   inputUser.setAttribute('type', 'email');
   inputUser.classList.add('input-user');
   inputUser.setAttribute('placeholder', 'Correo/Usuario');
   inputUser.value = '';
-  //   inputUser.innerHTML = '';
   welcome.appendChild(inputUser);
 
   const inputPwd = document.createElement('input');
@@ -17,7 +19,7 @@ export const renderWelcome = () => {
   inputPwd.classList.add('input-pwd');
   inputPwd.setAttribute('placeholder', 'Contraseña');
   inputPwd.value = '';
-  //   inputPwd.innerHTML = '';
+
   welcome.appendChild(inputPwd);
 
   const loginButton = document.createElement('button');
@@ -26,12 +28,22 @@ export const renderWelcome = () => {
   loginButton.textContent = 'Ingresar';
   welcome.appendChild(loginButton);
 
+  const logo = document.createElement('img');
+  logo.setAttribute('class', 'img-logo');
+  logo.src = './imgs/logo.png';
+  divWelcome.appendChild(logo);
+
+  const slogan = document.createElement('h2');
+  slogan.setAttribute('class', 'h2-slogan');
+  slogan.innerHTML = '"Cada gato tiene una historia.”';
+  divWelcome.appendChild(slogan);
+
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button');
   //registerButton.setAttribute('type', 'submit');
   registerButton.textContent = 'Registrarse';
-  welcome.appendChild(registerButton);
+  divWelcome.appendChild(registerButton);
   //   console.log(registerButton);
 
-  return welcome;
+  return divWelcome;
 };

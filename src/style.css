@@ -8,8 +8,7 @@ header{
     height: 130px;
     background-image: url('./imgs/header.jpg') ;
     background-size: cover;
-    margin: 0 0 30px 0;
-
+    margin: 0 0 10% 0;
 }
 
 body{
@@ -38,24 +37,56 @@ form{
 }
 
 .input-user, .input-pwd{
-    border-radius: 5%;
-    border: none;
-    height: 30px;
-    width: 50%;
-    background-color: #0BC04B;
-    margin: 20px 10px 15px 10px;
+    border-radius: 10px;
+    height: 37px;
+    width: 80%;
+    background-color: white;
+    border-color: #0BC04B ;
+   
+}
+
+.input-user{
+    margin: 4% 8%;
+}
+
+.input-pwd{
+    margin: 1% 8% ;
 }
 
 .login-button, .register-button{
     border-radius: 15px;
     border: none;
-    height: 30px;
-    width: 50%;
+    height: 37px;
+    width: 70%;
     background-color: #F6CA3B;
-    margin: 20px 10px 15px 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.login-button{
+    margin: 5% 13%;
+    box-shadow: 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.register-button{
+    margin: 45px 18%;
+    box-shadow: 0 5px rgba(0, 0, 0, 0.5);
 }
 
 ::placeholder{
-    color: white;
+    color: #0BC04B;
     text-align: center;
+    font-size: 18px;
 }
+
+.img-logo{
+    width: 100%;
+    margin-top:9%;
+
+}
+
+.h2-slogan{
+    text-align: center;
+    font-size: 40px;
+}
+
