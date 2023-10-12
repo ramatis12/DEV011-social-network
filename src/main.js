@@ -33,16 +33,19 @@ buttonLogin.addEventListener('click', (e) => {
       alert(`Usuario creado${user}`);
     })
     .catch((error) => {
-      const errorCode = error.code;
+        const errorCode = error.code;
+        
+        const errorMessage = error.message;
+        
+        
+        // if(errorCode == 'auth/email-already-in-use')
+        //     alert('El correo ya está en uso');
+        // else if (errorCode == 'auth/invalid-email')
+        //     alert ('El correo no es válido');
+        // else if (errorCode == 'auth/weak-password')
+        //     alert ('La contraseña debe tener al menos 6 caracteres');
 
-      if (errorCode === 'auth/email-already-in-use') {
-        alert('El correo ya está en uso');
-      } else if (errorCode === 'auth/invalid-email') {
-        alert('El correo no es válido');
-      } else if (errorCode === 'auth/weak-password') {
-        alert('La contraseña debe tener al menos 6 caracteres');
-      }
-    });
+    })
 
   // createUserWithEmailAndPassword()
 });
