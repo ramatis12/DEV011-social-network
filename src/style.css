@@ -139,7 +139,7 @@ form {
     grid-row-end: 2;
     margin: 0;
     justify-self: center;
-    align-items: start;
+    align-self: end;
   }
   .register-button {
     grid-column-start: 2;
@@ -148,7 +148,7 @@ form {
     grid-row-end: 2;
     margin: 0 ;
     justify-self: center;
-    align-self: end;
+    align-self: start;
   }
   body{
     background-image: ;
@@ -168,7 +168,7 @@ form {
     bottom: 0;
   }
   form {
-    background-color: #F482C4;
+    background-color: #f7cae4;
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 1;
@@ -189,8 +189,5 @@ form {
     grid-row-start: 1;
     grid-row-end: 1;
     padding: 5% 1%;
-  }
-  form{
-
   }
 }
