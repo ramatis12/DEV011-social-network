@@ -2,6 +2,7 @@ export const renderRegister = () => {
   const divRegister = document.createElement("div");
   divRegister.setAttribute("id", "div-register");
 
+  
   const registerForm = document.createElement("form");
   registerForm.setAttribute("id", "register-form");
   registerForm.setAttribute("method", "GET");
