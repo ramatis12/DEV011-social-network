@@ -4,12 +4,20 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { renderWelcome } from './welcome.js';
 import { db } from './firebase.js';
+import { renderRegister } from './register.js';
 // import { createUserWithEmailAndPassword, auth } from './auth.js';
 
 console.log(db);
 
 const root = document.querySelector('#root');
 root.appendChild(renderWelcome());
+const registerButtonWelcome = document.querySelector('.register-button');
+
+registerButtonWelcome.addEventListener('click', (e) => {
+  root.innerHTML = '';
+  root.appendChild(renderRegister());
+
+})
 
 // const email = document.querySelector(".input-user");
 // const emailInput = email.value;
