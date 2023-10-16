@@ -1,6 +1,6 @@
 // Este es el punto de entrada de tu aplicacion
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { renderWelcome } from './welcome.js';
 import { renderRegister } from './register.js';
 import { db } from './firebase.js';
@@ -42,6 +42,7 @@ console.log(registerButton);
 
 //------------------ Autentificacion con correo --------------------------------------------
 registerButton.addEventListener('click', (e) => {
+  e.preventDefault();
   const auth = getAuth();
   const email = document.querySelector('.input-user-register').value;
   const password = document.querySelector('.input-pwd-register').value;
@@ -55,7 +56,7 @@ registerButton.addEventListener('click', (e) => {
       alert(`Usuario creado${user}`);
 
       const usersCollection = collection(db, 'users');
-      const userDoc = doc(usersCollection, userId);
+      //const userDoc = addDoc(usersCollection, userId);
 
       const userData = {
         name: userEmail,
@@ -63,16 +64,27 @@ registerButton.addEventListener('click', (e) => {
         email: userEmail,
       };
 
-      return setDoc(userDoc, userData);
-    })
-    .catch((error) => {
+      const agregarDocumento = async () => {
+        try {
+          const docRef = await addDoc(usersCollection, userData);
+          console.log('Documento agregado con ID: ', docRef.id);
+        }
+        
+      
+    catch(error)  {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.error("error al registrar usuario", error)
         // if(errorCode == 'auth/email-already-in-use')
         //     alert('El correo ya está en uso');
         // else if (errorCode == 'auth/invalid-email')
         //     alert ('El correo no es válido');
         // else if (errorCode == 'auth/weak-password')
         //     alert ('La contraseña debe tener al menos 6 caracteres')
-    })
-});
+    }
+  };
+      
+  agregarDocumento();
+  });
+
+})
