@@ -23,16 +23,16 @@
 // const emailInput = email.value;
 //  console.log (emailInput);
 
-// const password = document.getElementsByClassName('input-pwd').value; 
+// const password = document.getElementsByClassName('input-pwd').value;
 // console.log (password);
 // createUserWithEmailAndPassword(auth, password)
 // .then((userCredential) => {
 //         const user = userCredential.user;
-//         console.log("Usuario creado" + user) 
+//         console.log("Usuario creado" + user)
 //     })
 //     .catch((error) => {
 //         const errorCode = error.code;
-        
+
 //         if(errorCode == 'auth/email-already-in-use')
 //             alert('El correo ya está en uso');
 //         else if (errorCode == 'auth/invalid-email')
