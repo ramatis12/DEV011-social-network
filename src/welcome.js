@@ -24,7 +24,6 @@ export const renderWelcome = () => {
 
   const loginButton = document.createElement('button');
   loginButton.setAttribute('class', 'login-button');
-  //loginButton.setAttribute('type', 'submit');
   loginButton.textContent = 'Ingresar';
   welcome.appendChild(loginButton);
 
@@ -40,10 +39,8 @@ export const renderWelcome = () => {
 
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button');
-  //registerButton.setAttribute('type', 'submit');
   registerButton.textContent = 'Registrarse';
   divWelcome.appendChild(registerButton);
-  //   console.log(registerButton);
 
   const googleRegisterButton = document.createElement('button');
   googleRegisterButton.setAttribute('class', 'google-register-button');
@@ -54,8 +51,6 @@ export const renderWelcome = () => {
   googleRegisterButton.appendChild(googleIcon);
   googleRegisterButton.appendChild(text);
   divWelcome.appendChild(googleRegisterButton);
-
-  // console.log(googleRegisterButton);
 
   return divWelcome;
 };
