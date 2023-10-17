@@ -36,7 +36,7 @@ export const renderEditProfile = () => {
   const buttonSave = document.createElement('button');
   buttonSave.setAttribute('id', 'button-save');
   buttonSave.textContent = 'Guardar';
-  buttonSave.appendChild(buttonSave);
+  divEditProfile.appendChild(buttonSave);
 
   const linkCalendar = document.createElement('p');
   linkCalendar.setAttribute('id', 'link-calendar');
