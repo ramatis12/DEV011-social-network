@@ -105,6 +105,7 @@ buttonLogin.addEventListener('click', (e) => {
   e.preventDefault();
   const email = document.querySelector('.input-user').value;
   const password = document.querySelector('.input-pwd').value;
+  
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     // Signed in
