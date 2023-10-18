@@ -39,6 +39,7 @@ export const renderWelcome = () => {
 
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button');
+  registerButton.setAttribute('data-route', '/register');
   registerButton.textContent = 'Registrarse';
   divWelcome.appendChild(registerButton);
 
