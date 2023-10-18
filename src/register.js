@@ -40,7 +40,9 @@ export const renderRegister = () => {
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button-1');
   registerButton.textContent = 'Registrarse';
-  registerForm.appendChild(registerButton);
+  registerButton.setAttribute('data-route', '/wall');
+  divRegister.appendChild(registerButton);
+  
 
   return divRegister;
 };

@@ -6,7 +6,7 @@ import { renderRegister } from './register.js';
 import { db } from './firebase.js';
 import { renderMenu } from './views/menu.js';
 import { renderEditProfile } from './views/editProfile.js';
-
+import { router } from './router.js';
 const auth = getAuth();
 
 // ------------------- Selectores Dom---------------------
@@ -31,17 +31,27 @@ googleButton.addEventListener('click', (e) => {
       console.error('Error de autenticación con Google:', error);
     });
 });
+// --------------------- Boton para registrar un nuevo usuario-------------------------------
+registerButtonWelcome.addEventListener('click', (e) => {
+  const target = e.target;
+  console.log(location.pathname);
+  const route1 = target.getAttribute('data-route');
+  if (route1) {
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState(null, '', route1);
+    router();
+  }
+});
 // -----------------------------DOM segunda vista--------------------------------------------
 const newView = renderRegister();
+const registerButton = '';
+if(newView){
+  root.appendChild(renderRegister());
+  registerButton = document.querySelector('.register-button-1');
+console.log(document.querySelector('.register-button-1'));
+}
 
-// --------------------- Boton para registrar un nuevo usuario-------------------------------
-registerButtonWelcome.addEventListener('click', () => {
-  root.innerHTML = '';
-  root.appendChild(newView);
-});
 
-const registerButton = newView.querySelector('.register-button-1');
-console.log(registerButton);
 
 // ------------------ Autentificacion con correo --------------------------------------------
 registerButton.addEventListener('click', (e) => {
@@ -60,6 +70,14 @@ registerButton.addEventListener('click', (e) => {
         const userId = user.uid;
         const userEmail = user.email;
         alert(`Usuario creado ${ user }`);
+        const target = e.target;
+       // console.log(location.pathname);
+        const route2 = target.getAttribute('data-route');
+        if (route2) {
+          // eslint-disable-next-line no-restricted-globals
+          history.pushState(null, '', route2);
+          router();
+        }
         // const navMenu = document.querySelector('nav');
         // navMenu.appendChild(renderMenu);
 
@@ -81,7 +99,7 @@ registerButton.addEventListener('click', (e) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.error('error al registrar usuario', error);
+       // console.error('error al registrar usuario', error);
         alert(errorCode);
         alert(errorMessage);
         // if(errorCode == 'auth/email-already-in-use')
