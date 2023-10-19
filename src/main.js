@@ -78,20 +78,7 @@ console.log(registerButton);
 
 // if (password === passwordConfirm) {
 //   // const date = document.querySelector('.input-date').value;
-//   createUserWithEmailAndPassword(auth, email, password)
-//     .then((currentUser) => {
-//       const user = currentUser.user;
-//       const userId = user.uid;
-//       const userEmail = user.email;
-//       alert(`Usuario creado ${ user }`);
-//       const target = e.target;
-//      // console.log(location.pathname);
-//       const route2 = target.getAttribute('data-route');
-//       if (route2) {
-//         // eslint-disable-next-line no-restricted-globals
-//         history.pushState(null, '', route2);
-//         router();
-//       }
+//  
 //       // const navMenu = document.querySelector('nav');
 //       // navMenu.appendChild(renderMenu);
 //       // const usersCollection = collection(db, 'users');
@@ -109,21 +96,7 @@ console.log(registerButton);
 //       //     console.log('Documento agregado con ID: ', docRef.id);
 //     })
 
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//      // console.error('error al registrar usuario', error);
-//       alert(errorCode);
-//       alert(errorMessage);
-//       // if(errorCode == 'auth/email-already-in-use')
-//       //     alert('El correo ya está en uso');
-//       // else if (errorCode == 'auth/invalid-email')
-//       //     alert ('El correo no es válido');
-//       // else if (errorCode == 'auth/weak-password')
-//       //     alert ('La contraseña debe tener al menos 6 caracteres')
-//     });
-// }
-
+//     
 // // agregarDocumento();
 // // });
 // // }
