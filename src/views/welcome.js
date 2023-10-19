@@ -1,3 +1,5 @@
+import { logInGoogle } from '../auth.js';
+
 export const renderWelcome = () => {
   const divWelcome = document.createElement('div');
   divWelcome.setAttribute('id', 'div-welcome');
@@ -37,11 +39,11 @@ export const renderWelcome = () => {
   slogan.innerHTML = '"Cada gato tiene una historia.”';
   divWelcome.appendChild(slogan);
 
-  const registerButton = document.createElement('button');
-  registerButton.setAttribute('class', 'register-button');
-  registerButton.setAttribute('data-route', '/register');
-  registerButton.textContent = 'Registrarse';
-  divWelcome.appendChild(registerButton);
+  const registerButtonWelcome = document.createElement('button');
+  registerButtonWelcome.setAttribute('class', 'register-button');
+  registerButtonWelcome.setAttribute('data-route', '/register');
+  registerButtonWelcome.textContent = 'Registrarse';
+  divWelcome.appendChild(registerButtonWelcome);
 
   const googleRegisterButton = document.createElement('button');
   googleRegisterButton.setAttribute('class', 'google-register-button');
@@ -52,6 +54,10 @@ export const renderWelcome = () => {
   googleRegisterButton.appendChild(googleIcon);
   googleRegisterButton.appendChild(text);
   divWelcome.appendChild(googleRegisterButton);
+
+  googleRegisterButton.addEventListener('click', () => {
+    logInGoogle();
+  });
 
   return divWelcome;
 };

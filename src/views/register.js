@@ -1,3 +1,6 @@
+import { emailAuthentication } from "../auth.js";
+import { auth } from "../firebase.js";
+
 export const renderRegister = () => {
   const divRegister = document.createElement('div');
   divRegister.setAttribute('id', 'div-register');
@@ -41,8 +44,13 @@ export const renderRegister = () => {
   registerButton.setAttribute('class', 'register-button-1');
   registerButton.textContent = 'Registrarse';
   registerButton.setAttribute('data-route', '/wall');
-  divRegister.appendChild(registerButton);
-  
+  registerForm.appendChild(registerButton);
+
+  registerButton.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    emailAuthentication (auth, inputUser.value, inputPwd.value )
+    console.log('Hola, Grecia');
+  });
 
   return divRegister;
 };
