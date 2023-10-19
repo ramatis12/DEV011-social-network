@@ -1,6 +1,6 @@
 import { renderWelcome } from './views/welcome.js';
 import { renderRegister } from './views/register.js';
-import { renderEditProfile } from './views/editProfile.js';
+import { renderWall } from './views/wall.js';
 
 export function router() {
   const root = document.querySelector('#root');
@@ -11,7 +11,7 @@ export function router() {
     root.appendChild(renderRegister());
   } else if (path === '/wall') {
     root.innerHTML = '';
-    root.appendChild(renderEditProfile());
+    root.appendChild(renderWall());
   } else if (path === '/welcome') {
     root.innerHTML = '';
     root.appendChild(renderWelcome());
