@@ -1,6 +1,5 @@
-import { renderWelcome } from './welcome.js';
-import { renderRegister } from './register.js';
-//import { renderWall } from './wall.js';
+import { renderWelcome } from './views/welcome.js';
+import { renderRegister } from './views/register.js';
 import { renderEditProfile } from './views/editProfile.js';
 
 export function router() {
