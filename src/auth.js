@@ -1,3 +1,35 @@
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
+export function logInGoogle() {
+  return new Promise((resolve, reject) => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // El usuario ha iniciado sesión con Google exitosamente.
+        const user = result.user;
+        console.log('Usuario autenticado:', user);
+        resolve(user); // Resolvemos la promesa con el usuario
+      })
+      .catch((error) => {
+        // Ocurrió un error durante el proceso de inicio de sesión.
+        console.error('Error de autenticación con Google:', error);
+        reject(error); // Rechazamos la promesa con el error
+      });
+  });
+}
+
+// .then((result) => {
+//     // El usuario ha iniciado sesión con Google exitosamente.
+//     const user = result.user;
+//     console.log('Usuario autenticado:', user);
+//   })
+//   .catch((error) => {
+//     // Ocurrió un error durante el proceso de inicio de sesión.
+//     console.error('Error de autenticación con Google:', error);
+//   });
+
 // const auth = firebase.auth();
 
 // const provider = new firebase.auth.GoogleAuth();
