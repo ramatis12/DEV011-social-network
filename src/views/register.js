@@ -41,8 +41,12 @@ export const renderRegister = () => {
   registerButton.setAttribute('class', 'register-button-1');
   registerButton.textContent = 'Registrarse';
   registerButton.setAttribute('data-route', '/wall');
-  divRegister.appendChild(registerButton);
-  
+  registerForm.appendChild(registerButton);
+
+  registerButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('Hola, Grecia');
+  });
 
   return divRegister;
 };
