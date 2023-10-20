@@ -1,5 +1,5 @@
-import { emailAuthentication } from '../auth.js';
-import { auth } from '../firebase.js';
+import { emailAuthentication } from '../functionAuth.js';
+import { auth } from '../conectionFirebase.js';
 
 export const renderRegister = () => {
   const divRegister = document.createElement('div');

@@ -1,5 +1,5 @@
 import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase.js';
+import { auth } from './conectionFirebase.js';
 import { router } from './router.js';
 
 export function logInGoogle() {
