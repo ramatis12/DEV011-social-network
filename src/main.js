@@ -3,7 +3,6 @@ import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWith
 import { collection, addDoc } from 'firebase/firestore';
 import { renderWelcome } from './views/welcome.js';
 import { renderRegister } from './views/register.js';
-import { db } from './firebase.js';
 import { renderMenu } from './views/menu.js';
 import { renderWall } from './views/wall.js';
 import { router } from './router.js';
@@ -12,7 +11,7 @@ import { login } from './auth.js';
 window.addEventListener('load', router);
 window.addEventListener('popstate', router);
 
-const auth = getAuth();
+
 // ------------------- Selectores Dom---------------------
 const root = document.querySelector('#root');
 root.appendChild(renderWelcome());
@@ -36,28 +35,34 @@ const registerButtonWelcome = document.querySelector('.register-button');
 //     });
 // });
 // --------------------- Eventos del router-------------------------------
-const email = document.querySelector('.input-user').value;
-const password = document.querySelector('.input-pwd').value;
-buttonLogin.addEventListener('click', (e) => {
+buttonLogin.addEventListener('click', async (e) => {
+  e.preventDefault()
+  const email = document.querySelector('.input-user').value;
+  const password = document.querySelector('.input-pwd').value;
   const target = e.target;
   console.log(location.pathname);
-  const route1 = target.getAttribute('data-route');
   
-    login(auth, email, password)
-      .then((user) => {
-        // El usuario ha iniciado sesión exitosamente
-        console.log("Usuario ha iniciado sesión:", user);
-        if (route1) {
-          // eslint-disable-next-line no-restricted-globals
-          history.pushState(null, '', route1);
-        router(); // Llamamos a "router" después del inicio de sesión
-      }
-      })
+    login(e,email, password)
+    //console.log({user}, " antes mostrarse");
+    
+    // if (user === undefined) return
+    // console.log({user}, " no deberias de mostrarse");
+    
+    // console.log(route1, "asdasdasdnasbdsaasj");
+   
+    // } 
+      // .then((user,) => {
 
-      .catch((error) => {
-        // Ocurrió un error en el inicio de sesión
-        console.error("Error de inicio de sesión:", error);
-      });
+      //   // El usuario ha iniciado sesión exitosamente
+      //   console.log("eror:", user, {error});
+      // })
+
+      // .catch((error) => {
+      //   // Ocurrió un error en el inicio de sesión
+      //   console.log("Error de inicio de sesión:", error);
+
+      //   alert('usuario no encontrado')
+      // });
     
   }
 );
