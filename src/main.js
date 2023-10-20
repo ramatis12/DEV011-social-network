@@ -5,7 +5,7 @@ import { renderWelcome } from './views/welcome.js';
 import { renderRegister } from './views/register.js';
 import { db } from './firebase.js';
 import { renderMenu } from './views/menu.js';
-import { renderEditProfile } from './views/editProfile.js';
+import { renderWall } from './views/wall.js';
 import { router } from './router.js';
 
 window.addEventListener('load', router);
@@ -96,7 +96,7 @@ console.log(registerButton);
 //       //     console.log('Documento agregado con ID: ', docRef.id);
 //     })
 
-//     
+//
 // // agregarDocumento();
 // // });
 // // }

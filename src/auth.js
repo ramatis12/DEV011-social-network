@@ -1,11 +1,8 @@
 import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase.js';
 
-
-
 export function logInGoogle() {
   return new Promise((resolve, reject) => {
-    
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
@@ -24,37 +21,33 @@ export function logInGoogle() {
 }
 
 export function emailAuthentication(auth, email, password) {
-  return new Promise ((resolve, reject) => {
-
+  return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
-     .then((currentUser) => {
-       const user = currentUser.user;
-       const userId = user.uid;
-       const userEmail = user.email;
-       alert(`Usuario creado ${ user }`);
-       resolve (user) ;
-     })   
-     .catch((error) => {
+      .then((currentUser) => {
+        const user = currentUser.user;
+        const userId = user.uid;
+        const userEmail = user.email;
+        alert(`Usuario creado ${ user }`);
+        resolve (user);
+      })
+      .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error('error al registrar usuario', error);
         alert(errorCode);
         alert(errorMessage);
-       /* if(errorCode == 'auth/email-already-in-use')
-        alert('El correo ya está en uso');
-        else if (errorCode == 'auth/invalid-email')
-         alert ('El correo no es válido');
-        else if (errorCode == 'auth/weak-password')
-        alert ('La contraseña debe tener al menos 6 caracteres')
-        });*/
+        // if(errorCode == 'auth/email-already-in-use'){
+        //   alert('El correo ya está en uso');
+        // } else if (errorCode == 'auth/invalid-email'){
+        //   alert ('El correo no es válido');
+        // } else if (errorCode == 'auth/weak-password'){
+        //   alert ('La contraseña debe tener al menos 6 caracteres')
+        // }
+        // });
         reject(error);
-
-});
-});
+      });
+  });
 }
-        
-        
-       
 
 // .then((result) => {
 //     // El usuario ha iniciado sesión con Google exitosamente.
