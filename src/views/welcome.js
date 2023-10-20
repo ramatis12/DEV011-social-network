@@ -1,4 +1,6 @@
-import { logInGoogle } from '../auth.js';
+import { logInGoogle, login } from '../auth.js';
+import { auth } from '../firebase.js';
+
 
 export const renderWelcome = () => {
   const divWelcome = document.createElement('div');
@@ -26,8 +28,12 @@ export const renderWelcome = () => {
 
   const loginButton = document.createElement('button');
   loginButton.setAttribute('class', 'login-button');
+  loginButton.setAttribute('data-route' , '/wall');
   loginButton.textContent = 'Ingresar';
   welcome.appendChild(loginButton);
+  //loginButton.addEventListener('click', () => {
+   // login(auth, inputUser.value, inputPwd.value);
+  //});
 
   const logo = document.createElement('img');
   logo.setAttribute('class', 'img-logo');
@@ -44,7 +50,7 @@ export const renderWelcome = () => {
   registerButtonWelcome.setAttribute('data-route', '/register');
   registerButtonWelcome.textContent = 'Registrarse';
   divWelcome.appendChild(registerButtonWelcome);
-
+  
   const googleRegisterButton = document.createElement('button');
   googleRegisterButton.setAttribute('class', 'google-register-button');
   const googleIcon = document.createElement('img');
@@ -58,6 +64,7 @@ export const renderWelcome = () => {
   googleRegisterButton.addEventListener('click', () => {
     logInGoogle();
   });
+  
 
   return divWelcome;
 };

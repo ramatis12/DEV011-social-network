@@ -1,5 +1,5 @@
-import { emailAuthentication } from "../auth.js";
-import { auth } from "../firebase.js";
+import { emailAuthentication } from '../auth.js';
+import { auth } from '../firebase.js';
 
 export const renderRegister = () => {
   const divRegister = document.createElement('div');
@@ -47,8 +47,8 @@ export const renderRegister = () => {
   registerForm.appendChild(registerButton);
 
   registerButton.addEventListener('click', (e) => {
-    e.preventDefault(); 
-    emailAuthentication (auth, inputUser.value, inputPwd.value )
+    e.preventDefault();
+    emailAuthentication(auth, inputUser.value, inputPwd.value);
     console.log('Hola, Grecia');
   });
 

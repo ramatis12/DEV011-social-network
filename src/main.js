@@ -3,15 +3,15 @@ import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWith
 import { collection, addDoc } from 'firebase/firestore';
 import { renderWelcome } from './views/welcome.js';
 import { renderRegister } from './views/register.js';
-import { db } from './firebase.js';
 import { renderMenu } from './views/menu.js';
-import { renderEditProfile } from './views/editProfile.js';
+import { renderWall } from './views/wall.js';
 import { router } from './router.js';
+import { login } from './auth.js';
 
 window.addEventListener('load', router);
 window.addEventListener('popstate', router);
 
-const auth = getAuth();
+
 // ------------------- Selectores Dom---------------------
 const root = document.querySelector('#root');
 root.appendChild(renderWelcome());
@@ -34,7 +34,38 @@ const registerButtonWelcome = document.querySelector('.register-button');
 //       console.error('Error de autenticación con Google:', error);
 //     });
 // });
-// --------------------- Boton para registrar un nuevo usuario-------------------------------
+// --------------------- Eventos del router-------------------------------
+buttonLogin.addEventListener('click', async (e) => {
+  e.preventDefault()
+  const email = document.querySelector('.input-user').value;
+  const password = document.querySelector('.input-pwd').value;
+  const target = e.target;
+  console.log(location.pathname);
+  
+    login(e,email, password)
+    //console.log({user}, " antes mostrarse");
+    
+    // if (user === undefined) return
+    // console.log({user}, " no deberias de mostrarse");
+    
+    // console.log(route1, "asdasdasdnasbdsaasj");
+   
+    // } 
+      // .then((user,) => {
+
+      //   // El usuario ha iniciado sesión exitosamente
+      //   console.log("eror:", user, {error});
+      // })
+
+      // .catch((error) => {
+      //   // Ocurrió un error en el inicio de sesión
+      //   console.log("Error de inicio de sesión:", error);
+
+      //   alert('usuario no encontrado')
+      // });
+    
+  }
+);
 registerButtonWelcome.addEventListener('click', (e) => {
   const target = e.target;
   console.log(location.pathname);
@@ -96,7 +127,7 @@ console.log(registerButton);
 //       //     console.log('Documento agregado con ID: ', docRef.id);
 //     })
 
-//     
+//
 // // agregarDocumento();
 // // });
 // // }
@@ -105,21 +136,7 @@ console.log(registerButton);
 // }
 // });
 // -------------------------------------- loggin -----------------------------------------
-buttonLogin.addEventListener('click', (e) => {
-  e.preventDefault();
-  const email = document.querySelector('.input-user').value;
-  const password = document.querySelector('.input-pwd').value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-    // Signed in
-      const user = userCredential.user;
-      console.log(user);
-    // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log('usuario no registrado', error);
-    });
-});
+//buttonLogin.addEventListener('click', (e) => {
+ // e.preventDefault();
+ // const email = document.querySelector('.input-user').value;
+  //const password = document.querySelector('.input-pwd').value;

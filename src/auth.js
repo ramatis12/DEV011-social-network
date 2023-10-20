@@ -1,11 +1,9 @@
-import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
+import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase.js';
-
-
+import { router } from './router.js';
 
 export function logInGoogle() {
   return new Promise((resolve, reject) => {
-    
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
@@ -24,37 +22,63 @@ export function logInGoogle() {
 }
 
 export function emailAuthentication(auth, email, password) {
-  return new Promise ((resolve, reject) => {
-
+  return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
-     .then((currentUser) => {
-       const user = currentUser.user;
-       const userId = user.uid;
-       const userEmail = user.email;
-       alert(`Usuario creado ${ user }`);
-       resolve (user) ;
-     })   
-     .catch((error) => {
+      .then((currentUser) => {
+        const user = currentUser.user;
+        const userId = user.uid;
+        const userEmail = user.email;
+        alert(`Usuario creado ${ user }`);
+        resolve (user);
+      })
+      .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error('error al registrar usuario', error);
         alert(errorCode);
         alert(errorMessage);
-       /* if(errorCode == 'auth/email-already-in-use')
-        alert('El correo ya está en uso');
-        else if (errorCode == 'auth/invalid-email')
-         alert ('El correo no es válido');
-        else if (errorCode == 'auth/weak-password')
-        alert ('La contraseña debe tener al menos 6 caracteres')
-        });*/
+        // if(errorCode == 'auth/email-already-in-use'){
+        //   alert('El correo ya está en uso');
+        // } else if (errorCode == 'auth/invalid-email'){
+        //   alert ('El correo no es válido');
+        // } else if (errorCode == 'auth/weak-password'){
+        //   alert ('La contraseña debe tener al menos 6 caracteres')
+        // }
+        // });
         reject(error);
-
-});
-});
+      });
+  });
 }
-        
-        
-       
+
+export function login(e,email, password) {
+
+  const route1 = e.target.getAttribute('data-route');
+  // return new Promise((resolve, reject) => {
+    return signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+    // Signed in
+      const user = userCredential.user;
+      console.log(user, "desde el then");
+      // resolve(user);
+      // return user
+      if (route1) {
+        // eslint-disable-next-line no-restricted-globals
+       history.pushState(null, '', '/wall');
+       router(); // Llamamos a "router" después del inicio de sesión
+      }
+
+    })
+    // ...
+    
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('usuario no registrado', error);
+      // reject(error);
+      // return error
+    });
+  }
+  // )};
 
 // .then((result) => {
 //     // El usuario ha iniciado sesión con Google exitosamente.
