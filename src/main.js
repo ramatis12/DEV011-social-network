@@ -7,6 +7,7 @@ import { db } from './firebase.js';
 import { renderMenu } from './views/menu.js';
 import { renderWall } from './views/wall.js';
 import { router } from './router.js';
+import { login } from './auth.js';
 
 window.addEventListener('load', router);
 window.addEventListener('popstate', router);
@@ -34,7 +35,32 @@ const registerButtonWelcome = document.querySelector('.register-button');
 //       console.error('Error de autenticación con Google:', error);
 //     });
 // });
-// --------------------- Boton para registrar un nuevo usuario-------------------------------
+// --------------------- Eventos del router-------------------------------
+const email = document.querySelector('.input-user').value;
+const password = document.querySelector('.input-pwd').value;
+buttonLogin.addEventListener('click', (e) => {
+  const target = e.target;
+  console.log(location.pathname);
+  const route1 = target.getAttribute('data-route');
+  
+    login(auth, email, password)
+      .then((user) => {
+        // El usuario ha iniciado sesión exitosamente
+        console.log("Usuario ha iniciado sesión:", user);
+        if (route1) {
+          // eslint-disable-next-line no-restricted-globals
+          history.pushState(null, '', route1);
+        router(); // Llamamos a "router" después del inicio de sesión
+      }
+      })
+
+      .catch((error) => {
+        // Ocurrió un error en el inicio de sesión
+        console.error("Error de inicio de sesión:", error);
+      });
+    
+  }
+);
 registerButtonWelcome.addEventListener('click', (e) => {
   const target = e.target;
   console.log(location.pathname);
@@ -105,21 +131,7 @@ console.log(registerButton);
 // }
 // });
 // -------------------------------------- loggin -----------------------------------------
-buttonLogin.addEventListener('click', (e) => {
-  e.preventDefault();
-  const email = document.querySelector('.input-user').value;
-  const password = document.querySelector('.input-pwd').value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-    // Signed in
-      const user = userCredential.user;
-      console.log(user);
-    // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log('usuario no registrado', error);
-    });
-});
+//buttonLogin.addEventListener('click', (e) => {
+ // e.preventDefault();
+ // const email = document.querySelector('.input-user').value;
+  //const password = document.querySelector('.input-pwd').value;

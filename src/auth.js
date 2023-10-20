@@ -1,4 +1,4 @@
-import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
+import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase.js';
 
 export function logInGoogle() {
@@ -48,6 +48,27 @@ export function emailAuthentication(auth, email, password) {
       });
   });
 }
+
+export function login(auth, email, password) {
+  return new Promise((resolve, reject) => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+    // Signed in
+      const user = userCredential.user;
+      console.log(user);
+      resolve(user);
+
+    })
+    // ...
+    
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('usuario no registrado', error);
+      reject(error);
+    });
+  }
+  )};
 
 // .then((result) => {
 //     // El usuario ha iniciado sesión con Google exitosamente.
