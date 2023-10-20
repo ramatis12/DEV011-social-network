@@ -5,14 +5,14 @@ export const createPost = () => {
   const inputName = document.createElement('input');
   inputName.setAttribute('id', 'input-name');
   inputName.setAttribute('type', 'text');
-  inputName.setAttribute('placeholder', 'Nombre del peludo');
+  inputName.setAttribute('placeholder', 'URL de tu foto');
   inputName.value = '';
   divCreatePost.appendChild(inputName);
 
   const textArea = document.createElement('textarea');
   textArea.setAttribute('id', 'text-area');
-  textArea.setAttribute('placeholder', 'Describe en 500 palabras la personalidad de tu peludo:');
-  textArea.setAttribute('maxlength', '500');
+  textArea.setAttribute('placeholder', 'Escribe en 140 palabras un encabezado para tu foto:');
+  textArea.setAttribute('maxlength', '140');
   textArea.value = '';
   divCreatePost.appendChild(textArea);
 

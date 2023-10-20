@@ -1,6 +1,5 @@
-import { logInGoogle, login } from '../auth.js';
-import { auth } from '../firebase.js';
-
+import { logInGoogle, login } from '../functionAuth.js';
+import { auth } from '../conectionFirebase.js';
 
 export const renderWelcome = () => {
   const divWelcome = document.createElement('div');

@@ -6,10 +6,10 @@ import { renderRegister } from './views/register.js';
 import { renderMenu } from './views/menu.js';
 import { renderWall } from './views/wall.js';
 import { router } from './router.js';
-import { login } from './auth.js';
+import { login } from './functionAuth.js';
 
-window.addEventListener('load', router);
-window.addEventListener('popstate', router);
+// window.addEventListener('load', router);
+// window.addEventListener('popstate', router);
 
 
 // ------------------- Selectores Dom---------------------
