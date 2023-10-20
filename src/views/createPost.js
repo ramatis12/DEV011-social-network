@@ -1,14 +1,4 @@
 export const createPost = () => {
-  const enlaceCSS = document.createElement('link');
-
-// Establece los atributos del enlace
-enlaceCSS.rel = 'stylesheet';
-enlaceCSS.type = 'text/css';
-enlaceCSS.href = 'ruta/a/estilos.css'; // Reemplaza 'ruta/a/estilos.css' con la ubicación de tu archivo CSS externo
-
-// Agrega el elemento <link> al encabezado (head) del documento
-document.head.appendChild(enlaceCSS);
-
   const divCreatePost = document.createElement('div');
   divCreatePost.setAttribute('id', 'div-create-post');
 

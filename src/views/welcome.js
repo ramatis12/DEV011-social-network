@@ -1,7 +1,6 @@
 import { logInGoogle, login } from '../functionAuth.js';
 import { auth } from '../conectionFirebase.js';
 
-
 export const renderWelcome = () => {
   const divWelcome = document.createElement('div');
   divWelcome.setAttribute('id', 'div-welcome');

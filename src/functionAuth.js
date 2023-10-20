@@ -2,6 +2,7 @@ import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, s
 import { auth } from './conectionFirebase.js';
 import { router } from './router.js';
 
+
 export function logInGoogle() {
   return new Promise((resolve, reject) => {
     const provider = new GoogleAuthProvider();

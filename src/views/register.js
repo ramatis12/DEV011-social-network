@@ -1,6 +1,7 @@
 import { emailAuthentication } from '../functionAuth.js';
 import { auth } from '../conectionFirebase.js';
 
+
 export const renderRegister = () => {
   const divRegister = document.createElement('div');
   divRegister.setAttribute('id', 'div-register');
