@@ -1,142 +1,51 @@
 // Este es el punto de entrada de tu aplicacion
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
-import { renderWelcome } from './views/welcome.js';
+import { createPost } from './views/createPost.js';
 import { renderRegister } from './views/register.js';
-import { renderMenu } from './views/menu.js';
 import { renderWall } from './views/wall.js';
-import { router } from './router.js';
-import { login } from './functionAuth.js';
+import { renderWelcome } from './views/welcome.js';
+import { renderError } from './views/error.js';
 
-// window.addEventListener('load', router);
-// window.addEventListener('popstate', router);
+const routes = [
+  { path: '/', component: renderWelcome },
+  { path: '/registro', component: renderRegister },
+  { path: '/muro', component: renderWall },
+  { path: '/crear_post', component: createPost },
+  { path: '/error', component: renderError },
+];
 
+const defaultRoute = '/';
+const root = document.getElementById('root');
 
-// ------------------- Selectores Dom---------------------
-const root = document.querySelector('#root');
-root.appendChild(renderWelcome());
-const buttonLogin = document.querySelector('.login-button');
-// const googleButton = document.querySelector('.google-register-button');
-const registerButtonWelcome = document.querySelector('.register-button');
+function navigateTo(path) {
+  const route = routes.find((routeFound) => routeFound.path === path);
 
-// --------------------------- Autentificacion con Google--------------------------
-// const googleProvider = new GoogleAuthProvider();
-// googleButton.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   signInWithPopup(auth, googleProvider)
-//     .then((result) => {
-//       // El usuario ha iniciado sesión con Google exitosamente.
-//       const user = result.user;
-//       console.log('Usuario autenticado:', user);
-//     })
-//     .catch((error) => {
-//       // Ocurrió un error durante el proceso de inicio de sesión.
-//       console.error('Error de autenticación con Google:', error);
-//     });
-// });
-// --------------------- Eventos del router-------------------------------
-buttonLogin.addEventListener('click', async (e) => {
-  e.preventDefault()
-  const email = document.querySelector('.input-user').value;
-  const password = document.querySelector('.input-pwd').value;
-  const target = e.target;
-  console.log(location.pathname);
-  
-    login(e,email, password)
-    //console.log({user}, " antes mostrarse");
-    
-    // if (user === undefined) return
-    // console.log({user}, " no deberias de mostrarse");
-    
-    // console.log(route1, "asdasdasdnasbdsaasj");
-   
-    // } 
-      // .then((user,) => {
+  if (route && route.component) {
+    window.history.pushState(
+      {},
+      route.path,
+      window.location.origin + route.path,
+    );
 
-      //   // El usuario ha iniciado sesión exitosamente
-      //   console.log("eror:", user, {error});
-      // })
-
-      // .catch((error) => {
-      //   // Ocurrió un error en el inicio de sesión
-      //   console.log("Error de inicio de sesión:", error);
-
-      //   alert('usuario no encontrado')
-      // });
-    
+    if (root.firstChild) {
+      root.removeChild(root.firstChild);
+    }
+    root.appendChild(route.component());
+  } else {
+    navigateTo('/error');
   }
-);
-registerButtonWelcome.addEventListener('click', (e) => {
-  const target = e.target;
-  console.log(location.pathname);
-  const route1 = target.getAttribute('data-route');
-  if (route1) {
-    // eslint-disable-next-line no-restricted-globals
-    history.pushState(null, '', route1);
-    router();
-  }
+}
+window.onpopstate = () => {
+  navigateTo(window.location.pathname);
+};
+
+window.addEventListener('navigateTo', (event) => {
+  navigateTo(event.detail);
 });
-// -----------------------------DOM segunda vista--------------------------------------------
-const newView = renderRegister();
-// const registerButton = '';
-const registerButton = newView.querySelector('.register-button-1');
-console.log(location.pathname);
 
-console.log(registerButton);
-// if(newView){
-//   root.appendChild(renderRegister());
-//   registerButton = document.querySelector('.register-button-1');
-// console.log(document.querySelector('.register-button-1'));
-// }
+if (window.location.pathname === '/') {
+  navigateTo('/');
+} else {
+  navigateTo(defaultRoute);
+}
 
-// // ------------------ Autentificacion con correo --------------------------------------------
-// registerButton.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   console.log('estoy funcionando');
-//   const target = e.target;
-//   console.log(location.pathname);
-//   const route1 = target.getAttribute('data-route');
-//   if (route1) {
-//     // eslint-disable-next-line no-restricted-globals
-//     history.pushState(null, '', route1);
-//     router();
-//   }
-// root.innerHTML = '';
-// root.appendChild(renderEditProfile());
-// const email = document.querySelector('.input-user-register').value;
-// const password = document.querySelector('.input-pwd-register').value;
-// const passwordConfirm = document.querySelector('.input-pwd-confirm').value;
-
-// if (password === passwordConfirm) {
-//   // const date = document.querySelector('.input-date').value;
-//  
-//       // const navMenu = document.querySelector('nav');
-//       // navMenu.appendChild(renderMenu);
-//       // const usersCollection = collection(db, 'users');
-//       // // const userDoc = addDoc(usersCollection, userId);
-
-//       // const userData = {
-//       //   name: userEmail,
-//       //   ID: userId,
-//       //   email: userEmail,
-//       // };
-
-//       // const agregarDocumento = async () => {
-//       //   try {
-//       //     const docRef = await addDoc(usersCollection, userData);
-//       //     console.log('Documento agregado con ID: ', docRef.id);
-//     })
-
-//
-// // agregarDocumento();
-// // });
-// // }
-// else {
-//   alert('Contraseñas no coinciden');
-// }
-// });
-// -------------------------------------- loggin -----------------------------------------
-//buttonLogin.addEventListener('click', (e) => {
- // e.preventDefault();
- // const email = document.querySelector('.input-user').value;
-  //const password = document.querySelector('.input-pwd').value;
+// navigateTo(window.location.pathname || defaultRoute);

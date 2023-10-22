@@ -1,7 +1,6 @@
-import {  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './conectionFirebase.js';
-import { router } from './router.js';
-
+// import { router } from './router.js';
 
 export function logInGoogle() {
   return new Promise((resolve, reject) => {
@@ -12,7 +11,7 @@ export function logInGoogle() {
         // El usuario ha iniciado sesión con Google exitosamente.
         const user = result.user;
         console.log('Usuario autenticado:', user);
-        resolve(user); // Resolvemos la promesa con el usuario
+        resolve('/muro'); // Resolvemos la promesa con el usuario
       })
       .catch((error) => {
         // Ocurrió un error durante el proceso de inicio de sesión.
@@ -22,7 +21,7 @@ export function logInGoogle() {
   });
 }
 
-export function emailAuthentication(auth, email, password) {
+export function emailAuthentication(email, password) {
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((currentUser) => {
@@ -30,109 +29,48 @@ export function emailAuthentication(auth, email, password) {
         const userId = user.uid;
         const userEmail = user.email;
         alert(`Usuario creado ${ user }`);
-        resolve (user);
+        resolve('/muro');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error('error al registrar usuario', error);
-        alert(errorCode);
-        alert(errorMessage);
-        // if(errorCode == 'auth/email-already-in-use'){
-        //   alert('El correo ya está en uso');
-        // } else if (errorCode == 'auth/invalid-email'){
-        //   alert ('El correo no es válido');
-        // } else if (errorCode == 'auth/weak-password'){
-        //   alert ('La contraseña debe tener al menos 6 caracteres')
-        // }
-        // });
+        if (errorCode === 'auth/email-already-in-use') {
+          alert('El correo ya está en uso', errorMessage);
+        } else if (errorCode === 'auth/invalid-email') {
+          alert('El correo no es válido', errorMessage);
+        } else if (errorCode === 'auth/invalid-password') {
+          alert('La contraseña debe tener al menos 6 caracteres', errorMessage);
+        }
         reject(error);
       });
   });
 }
 
-export function login(e,email, password) {
-
-  const route1 = e.target.getAttribute('data-route');
-  // return new Promise((resolve, reject) => {
-    return signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-    // Signed in
-      const user = userCredential.user;
-      console.log(user, "desde el then");
+export function login(email, password) {
+  return new Promise((resolve, reject) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user, 'desde el then');
+        resolve('/muro');
       // resolve(user);
       // return user
-      if (route1) {
-        // eslint-disable-next-line no-restricted-globals
-       history.pushState(null, '', '/wall');
-       router(); // Llamamos a "router" después del inicio de sesión
-      }
-
-    })
-    // ...
-    
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log('usuario no registrado', error);
-      // reject(error);
-      // return error
-    });
-  }
-  // )};
-
-// .then((result) => {
-//     // El usuario ha iniciado sesión con Google exitosamente.
-//     const user = result.user;
-//     console.log('Usuario autenticado:', user);
-//   })
-//   .catch((error) => {
-//     // Ocurrió un error durante el proceso de inicio de sesión.
-//     console.error('Error de autenticación con Google:', error);
-//   });
-
-// const auth = firebase.auth();
-
-// const provider = new firebase.auth.GoogleAuth();
-
-// export async function login() {
-//   try {
-//     const response = await auth.signInWithPopup(provider);
-//     return response.user;
-//   } catch (error) {
-//     throw new Error(error);
-//   }
-// }
-
-// export function logout() {
-//   auth.signOut();
-// }
-
-// import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-// const auth = getAuth();
-// console.log (getAuth());
-
-// const email = document.querySelector(".input-user");
-// const emailInput = email.value;
-//  console.log (emailInput);
-
-// const password = document.getElementsByClassName('input-pwd').value;
-// console.log (password);
-// createUserWithEmailAndPassword(auth, password)
-// .then((userCredential) => {
-//         const user = userCredential.user;
-//         console.log("Usuario creado" + user)
-//     })
-//     .catch((error) => {
-//         const errorCode = error.code;
-
-//         if(errorCode == 'auth/email-already-in-use')
-//             alert('El correo ya está en uso');
-//         else if (errorCode == 'auth/invalid-email')
-//             alert ('El correo no es válido');
-//         else if (errorCode == 'auth/weak-password')
-//             alert ('La contraseña debe tener al menos 6 caracteres');
-
-//     })
-
-//     export {createUserWithEmailAndPassword, auth};
+      }) // ...
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode === 'auth/user-not-found') {
+        // El usuario no está registrado, muestra una alerta y redirige a la página de registro.
+          alert('Usuario no registrado. Por favor, regístrate.');
+          window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/registro' }));
+        } else {
+        // Otro tipo de error, puedes manejarlo de acuerdo a tus necesidades.
+          console.error('Error en el inicio de sesión:', errorMessage);
+        // Aquí podrías mostrar una alerta personalizada si lo deseas.
+        }
+        reject(error);
+      });
+  });
+}

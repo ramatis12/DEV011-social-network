@@ -17,10 +17,18 @@ export const renderWall = () => {
   postOption.src = '../imgs/upload pic.png';
   divMenu.appendChild(postOption);
 
+  postOption.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/crear_post' }));
+  });
+
   const logout = document.createElement('img');
   logout.setAttribute('id', 'logout');
   logout.src = '../imgs/logout.png';
   divMenu.appendChild(logout);
+
+  logout.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/' }));
+  });
 
   const divPosts = document.createElement('div');
   divPosts.setAttribute('id', 'div-posts');
