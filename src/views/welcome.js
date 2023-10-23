@@ -1,7 +1,7 @@
 import { logInGoogle, login } from '../functionAuth.js';
-import { auth } from '../conectionFirebase.js';
 
 export const renderWelcome = () => {
+  document.querySelector('header').style.display = 'block';
   const divWelcome = document.createElement('div');
   divWelcome.setAttribute('id', 'div-welcome');
 
@@ -27,12 +27,23 @@ export const renderWelcome = () => {
 
   const loginButton = document.createElement('button');
   loginButton.setAttribute('class', 'login-button');
-  loginButton.setAttribute('data-route' , '/wall');
+  loginButton.setAttribute('data-route', '/wall');
   loginButton.textContent = 'Ingresar';
   welcome.appendChild(loginButton);
-  //loginButton.addEventListener('click', () => {
-   // login(auth, inputUser.value, inputPwd.value);
-  //});
+
+  loginButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    try {
+      const route = await login(inputUser.value, inputPwd.value);
+      if (route) {
+        window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
+      }
+    } catch (error) {
+      alert('Credenciales incorrectas', error);
+      inputUser.value = '';
+      inputPwd.value = '';
+    }
+  });
 
   const logo = document.createElement('img');
   logo.setAttribute('class', 'img-logo');
@@ -49,7 +60,11 @@ export const renderWelcome = () => {
   registerButtonWelcome.setAttribute('data-route', '/register');
   registerButtonWelcome.textContent = 'Registrarse';
   divWelcome.appendChild(registerButtonWelcome);
-  
+
+  registerButtonWelcome.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/registro' }));
+  });
+
   const googleRegisterButton = document.createElement('button');
   googleRegisterButton.setAttribute('class', 'google-register-button');
   const googleIcon = document.createElement('img');
@@ -60,10 +75,13 @@ export const renderWelcome = () => {
   googleRegisterButton.appendChild(text);
   divWelcome.appendChild(googleRegisterButton);
 
-  googleRegisterButton.addEventListener('click', () => {
-    logInGoogle();
+  googleRegisterButton.addEventListener('click', async () => {
+    try {
+      const route = await logInGoogle();
+      window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
+    } catch (error) {
+      console.error('Error en inico de sesión con Google', error);
+    }
   });
-  
-
   return divWelcome;
 };

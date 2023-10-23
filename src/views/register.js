@@ -1,6 +1,4 @@
 import { emailAuthentication } from '../functionAuth.js';
-import { auth } from '../conectionFirebase.js';
-
 
 export const renderRegister = () => {
   const divRegister = document.createElement('div');
@@ -47,10 +45,20 @@ export const renderRegister = () => {
   registerButton.setAttribute('data-route', '/wall');
   registerForm.appendChild(registerButton);
 
-  registerButton.addEventListener('click', (e) => {
+  registerButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    emailAuthentication(auth, inputUser.value, inputPwd.value);
-    console.log('Hola, Grecia');
+    try {
+      const route = await emailAuthentication(inputUser.value, inputPwd.value);
+      if (route) {
+        window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
+        console.log('Hola, Grecia');
+      }
+    } catch (error) {
+      alert('Error al registrar usuario:', error);
+      inputUser.value = '';
+      inputPwd.value = '';
+      inputPwdConfirm.value = '';
+    }
   });
 
   return divRegister;
