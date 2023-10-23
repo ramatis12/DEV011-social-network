@@ -1,13 +1,15 @@
+import { addPost, paintRealTime, querySnapshot } from "../functionAuth.js";
+
 export const createPost = () => {
   const divCreatePost = document.createElement('div');
   divCreatePost.setAttribute('id', 'div-create-post');
 
-  const inputName = document.createElement('input');
-  inputName.setAttribute('id', 'input-name');
-  inputName.setAttribute('type', 'text');
-  inputName.setAttribute('placeholder', 'URL de tu foto');
-  inputName.value = '';
-  divCreatePost.appendChild(inputName);
+  const urlImg = document.createElement('input');
+  urlImg.setAttribute('id', 'url-img');
+  urlImg.setAttribute('type', 'text');
+  urlImg.setAttribute('placeholder', 'URL de tu foto');
+  urlImg.value = '';
+  divCreatePost.appendChild(urlImg);
 
   const textArea = document.createElement('textarea');
   textArea.setAttribute('id', 'text-area');
@@ -20,6 +22,17 @@ export const createPost = () => {
   buttonSave.setAttribute('id', 'button-save');
   buttonSave.textContent = 'Guardar';
   divCreatePost.appendChild(buttonSave);
+
+  buttonSave.addEventListener('click', () => {
+    const text = divCreatePost.querySelector( '#text-area');
+    const imagen = divCreatePost.querySelector( '#url-img');
+    addPost (text.value , imagen.value);
+    text.value = '';
+    imagen.value = '';
+    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/muro' }));
+    
+  });
+
 
   return divCreatePost;
 };
