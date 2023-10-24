@@ -110,4 +110,5 @@ const orderPost = query(postCollection, orderBy ('date', 'desc'));
 export const paintRealTime = (callback) => onSnapshot( orderPost, callback );
 
 
+
 //export const deleteDocPost = deleteDoc(doc(db, postCollection, doc.id))
