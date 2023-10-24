@@ -1,4 +1,4 @@
-import { addPost, paintRealTime, querySnapshot } from "../functionAuth.js";
+import { addPost } from '../functionAuth.js';
 
 export const createPost = () => {
   const divCreatePost = document.createElement('div');
@@ -24,15 +24,13 @@ export const createPost = () => {
   divCreatePost.appendChild(buttonSave);
 
   buttonSave.addEventListener('click', () => {
-    const text = divCreatePost.querySelector( '#text-area');
-    const imagen = divCreatePost.querySelector( '#url-img');
-    addPost (text.value , imagen.value);
+    const text = divCreatePost.querySelector('#text-area');
+    const imagen = divCreatePost.querySelector('#url-img');
+    addPost(text.value, imagen.value);
     text.value = '';
     imagen.value = '';
     window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/muro' }));
-    
   });
-
 
   return divCreatePost;
 };

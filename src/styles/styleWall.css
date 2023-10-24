@@ -124,6 +124,7 @@
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-end: 1;
+
 }
 
 #counter{
@@ -135,6 +136,7 @@
     height: 34px;
     font-size: 13px;
     font-weight: bold;
+    justify-self: center;
 }
 
 
