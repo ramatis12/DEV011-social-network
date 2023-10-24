@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { collection, addDoc, getDocs, onSnapshot, orderBy, query, doc, deleteDoc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from './conectionFirebase.js';
 
@@ -139,4 +139,20 @@ export async function likePost(postId) {
   } catch (error) {
     console.error('Error al dar "me gusta" a la publicación:', error);
   }
+}
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    const email = user.email;
+    localStorage.setItem('emailLogeado', email);
+    console.log(email);
+  }
+});
+// const user = auth.user;
+
+// localStorage.setItem('emailLogeado', user);
+
+export async function editPost(postId, text) {
+  const postRef = doc(db, 'posts', postId);
+  await updateDoc(postRef, { text: text });
 }

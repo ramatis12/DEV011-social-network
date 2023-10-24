@@ -1,4 +1,4 @@
-import { paintRealTime, deletePost, likePost } from '../functionAuth.js';
+import { paintRealTime, deletePost, likePost, editPost } from '../functionAuth.js';
 
 export const renderWall = () => {
   document.querySelector('header').style.display = 'none';
@@ -68,6 +68,57 @@ export const renderWall = () => {
       editPosts.setAttribute('id', 'edit-posts');
       editPosts.src = '../imgs/edit-text.png';
       divDescription.appendChild(editPosts);
+
+      // editPosts.addEventListener('click', () => {
+      //   const description = divContainer.querySelector('#description-post');
+      //   const input = document.createElement('input');
+      //   input.setAttribute('id', 'input-edit-post');
+      //   input.value = description.textContent;
+      //   description.parentNode.replaceChild(input, description);
+      //   document.querySelector('#button-acept').style.display = 'block';
+      // });
+
+      const buttonAcept = document.createElement('button');
+      buttonAcept.setAttribute('id', 'button-acept');
+      buttonAcept.textContent = 'Aceptar';
+      buttonAcept.style.display = 'none';
+      divDescription.appendChild(buttonAcept);
+
+      // buttonAcept.addEventListener('click', () => {
+      //   const input = divContainer.querySelector('#input-edit-post');
+      //   const p = document.createElement('p');
+      //   p.setAttribute('id', 'description-post');
+      //   p.innerHTML = doc.data().text;
+      //   input.parentNode.replaceChild(p, input);
+      //   document.querySelector('#button-acept').style.display = 'none';
+      //   const postId = doc.id;
+      //   editPost(postId, );
+      // });
+
+      const email = doc.data().email;
+      const currentEmail = localStorage.getItem('emailLogeado');
+      if (email === currentEmail) {
+        divDescription.addEventListener('click', (event) => {
+          if (event.target.id === 'edit-posts') {
+            const description = divContainer.querySelector('#description-post');
+            const input = document.createElement('input');
+            input.setAttribute('id', 'input-edit-post');
+            input.value = description.textContent;
+            description.parentNode.replaceChild(input, description);
+            document.querySelector('#button-acept').style.display = 'block';
+          } else if (event.target.id === 'button-acept') {
+            const input = divContainer.querySelector('#input-edit-post');
+            const p = document.createElement('p');
+            p.setAttribute('id', 'description-post');
+            p.innerHTML = doc.data().text;
+            input.parentNode.replaceChild(p, input);
+            document.querySelector('#button-acept').style.display = 'none';
+            const postId = doc.id;
+            const inputValue = input.value;
+            editPost(postId, inputValue);
+          }
+        });
+      }
 
       const imgPost = document.createElement('img');
       imgPost.setAttribute('id', 'img-post-user');
