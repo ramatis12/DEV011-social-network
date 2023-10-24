@@ -1,5 +1,7 @@
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './conectionFirebase.js';
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, } from 'firebase/auth';
+import { auth, db } from './conectionFirebase.js';
+import {collection, addDoc, getDocs, onSnapshot, orderBy, query,} from 'firebase/firestore';
+
 // import { router } from './router.js';
 
 export function logInGoogle() {
@@ -74,3 +76,20 @@ export function login(email, password) {
       });
   });
 }
+
+const postCollection = collection(db, 'posts');
+export const addPost = (text, imagen) => {
+  const user = auth.currentUser;
+  const userEmail = user.email;
+  addDoc(postCollection, {
+    text, email:userEmail, imagen,
+    date: Date.now(),
+  });
+};
+
+export const querySnapshot = getDocs(postCollection);
+
+const orderPost = query(postCollection, orderBy ('date', 'asc'));
+
+export const paintRealTime = (callback) => onSnapshot( orderPost, callback );
+

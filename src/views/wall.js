@@ -1,8 +1,11 @@
+import { paintRealTime } from "../functionAuth.js";
 export const renderWall = () => {
   document.querySelector('header').style.display = 'none';
 
+
   const divContainer = document.createElement('div');
   divContainer.setAttribute('id', 'div-container');
+
 
   const divlogo = document.createElement('div');
   divlogo.setAttribute('id', 'div-logo');
@@ -38,34 +41,27 @@ export const renderWall = () => {
   ulCard.setAttribute('id', 'ul-card');
   divPosts.appendChild(ulCard);
 
-  const liCard = document.createElement('li');
-  liCard.setAttribute('id', 'li-card');
-  ulCard.appendChild(liCard);
-
-  // const liCard1 = document.createElement('li');
-  // liCard1.setAttribute('id', 'li-card');
-  // ulCard.appendChild(liCard1);
-
-  // const liCard2 = document.createElement('li');
-  // liCard2.setAttribute('id', 'li-card');
-  // ulCard.appendChild(liCard2);
-
-  // const liCard3 = document.createElement('li');
-  // liCard3.setAttribute('id', 'li-card');
-  // ulCard.appendChild(liCard3);
-
-  const divDescription = document.createElement('div');
+  paintRealTime((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id);
+      console.log(doc.data());
+      const ul = divContainer.querySelector('#ul-card');
+      const liCard = document.createElement('li');
+      liCard.setAttribute('id', 'li-card');
+      ul.appendChild(liCard);
+      
+      const divDescription = document.createElement('div');
   divDescription.setAttribute('id', 'div-description');
   liCard.appendChild(divDescription);
 
   const emailUser = document.createElement('p');
   emailUser.setAttribute('id', 'email-user');
-  emailUser.innerHTML = 'Datos del amigo peludo';
+  emailUser.value = doc.data ().email;
   divDescription.appendChild(emailUser);
 
   const descriptionPosts = document.createElement('p');
   descriptionPosts.setAttribute('id', 'description-post');
-  descriptionPosts.innerHTML = 'Lorem ipsum dolor sit amet, consectetu adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.';
+  descriptionPosts.innerHTML = doc.data ().text;
   divDescription.appendChild(descriptionPosts);
 
   const editPosts = document.createElement('img');
@@ -75,7 +71,7 @@ export const renderWall = () => {
 
   const imgPost = document.createElement('img');
   imgPost.setAttribute('id', 'img-post-user');
-  imgPost.src = 'https://www.elmueble.com/medio/2023/05/22/gatitos_1f740045_230522123911_1000x667.jpg';
+  imgPost.src = doc.data ().imagen;
   liCard.appendChild(imgPost);
 
   const divActions = document.createElement('div');
@@ -95,7 +91,25 @@ export const renderWall = () => {
   const imgDelete = document.createElement('img');
   imgDelete.setAttribute('id', 'img-delete');
   imgDelete.src = '../imgs/delete.png';
-  divActions.appendChild(imgDelete);
+  divActions.appendChild(imgDelete); 
+      
+    });
+  });
 
+
+  
+  // const liCard1 = document.createElement('li');
+  // liCard1.setAttribute('id', 'li-card');
+  // ulCard.appendChild(liCard1);
+
+  // const liCard2 = document.createElement('li');
+  // liCard2.setAttribute('id', 'li-card');
+  // ulCard.appendChild(liCard2);
+
+  // const liCard3 = document.createElement('li');
+  // liCard3.setAttribute('id', 'li-card');
+  // ulCard.appendChild(liCard3);
+
+  
   return divContainer;
 };
