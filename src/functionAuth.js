@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, } from 'firebase/auth';
 import { auth, db } from './conectionFirebase.js';
-import {collection, addDoc, getDocs, onSnapshot, orderBy, query,} from 'firebase/firestore';
+import {collection, addDoc, getDocs, onSnapshot, orderBy, query, doc, deleteDoc} from 'firebase/firestore';
 
 // import { router } from './router.js';
 
@@ -87,9 +87,27 @@ export const addPost = (text, imagen) => {
   });
 };
 
+//--------------------------manda a llamar los documentos de la coleccion-------------------------
 export const querySnapshot = getDocs(postCollection);
 
-const orderPost = query(postCollection, orderBy ('date', 'asc'));
+//------------------------ ordena de forma asc todos los post----------------------------------------
+const orderPost = query(postCollection, orderBy ('date', 'desc'));
 
+
+
+//-------------------eliminar un documento---------------------------------------------------------
+ export const deletePost = async (postId) => {
+  try {
+    const postRef = doc(db, 'posts', postId);
+    await deleteDoc(postRef);
+    console.log('Documento eliminado con éxito');
+  } catch (error) {
+    console.error('Error al eliminar el documento:', error);
+  }
+};
+//export const deleteDocPosts = (callback) => onSnapshot( deletePost, callback );
+//-------------------------renderiza los post en tiempo real-----------------------------------------
 export const paintRealTime = (callback) => onSnapshot( orderPost, callback );
 
+
+//export const deleteDocPost = deleteDoc(doc(db, postCollection, doc.id))

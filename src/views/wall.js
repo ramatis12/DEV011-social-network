@@ -1,4 +1,4 @@
-import { paintRealTime } from "../functionAuth.js";
+import { paintRealTime, deletePost} from "../functionAuth.js";
 export const renderWall = () => {
   document.querySelector('header').style.display = 'none';
 
@@ -42,22 +42,25 @@ export const renderWall = () => {
   divPosts.appendChild(ulCard);
 
   paintRealTime((querySnapshot) => {
+   ulCard.textContent = "";
     querySnapshot.forEach((doc) => {
       console.log(doc.id);
-      console.log(doc.data());
+     // console.log(doc.data());
       const ul = divContainer.querySelector('#ul-card');
       const liCard = document.createElement('li');
       liCard.setAttribute('id', 'li-card');
       ul.appendChild(liCard);
       
-      const divDescription = document.createElement('div');
+  const divDescription = document.createElement('div');
   divDescription.setAttribute('id', 'div-description');
   liCard.appendChild(divDescription);
 
   const emailUser = document.createElement('p');
   emailUser.setAttribute('id', 'email-user');
-  emailUser.value = doc.data ().email;
+  emailUser.innerHTML = doc.data ().email;
   divDescription.appendChild(emailUser);
+
+//console.log(doc.data ().email);
 
   const descriptionPosts = document.createElement('p');
   descriptionPosts.setAttribute('id', 'description-post');
@@ -92,9 +95,22 @@ export const renderWall = () => {
   imgDelete.setAttribute('id', 'img-delete');
   imgDelete.src = '../imgs/delete.png';
   divActions.appendChild(imgDelete); 
-      
+  imgDelete.addEventListener('click', () => {
+    const postId = doc.id; // Obtener el ID del post que se eliminará
+    deletePost(postId).then(() => {
+      // La eliminación ha tenido éxito, aquí puedes realizar actualizaciones en tiempo real de la vista
+      // Por ejemplo, podrías eliminar el elemento del DOM correspondiente al post eliminado
+      liCard.remove();
+    }).catch((error) => {
+      console.error('Error al eliminar el post:', error);
     });
   });
+});
+});    
+  
+
+    //});
+ // });
 
 
   
