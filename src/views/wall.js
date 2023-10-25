@@ -61,6 +61,7 @@ export const renderWall = () => {
 
       const descriptionPosts = document.createElement('p');
       descriptionPosts.setAttribute('id', 'description-post');
+      descriptionPosts.setAttribute('data-post-id', doc.id);
       descriptionPosts.innerHTML = doc.data().text;
       divDescription.appendChild(descriptionPosts);
 
@@ -155,18 +156,18 @@ export const renderWall = () => {
       imgDelete.src = '../imgs/delete.png';
       divActions.appendChild(imgDelete);
       imgDelete.addEventListener('click', () => {
-        if (window.confirm("Do you really want to leave?")) {
+        if (window.confirm("Este post irá a la caja de arena, seguro que deseas eliminarlo?")) {
           
-        }
+        
         const postId = doc.id; // Obtener el ID del post que se eliminará
         deletePost(postId).then(() => {
           liCard.remove();
         }).catch((error) => {
           console.error('Error al eliminar el post:', error);
         });
+      }
       });
     });
   });
-
   return divContainer;
 };
