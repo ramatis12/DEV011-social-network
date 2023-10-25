@@ -135,6 +135,13 @@ export async function likePost(postId) {
         // Actualiza el campo "likes" en Firestore
         await updateDoc(postRef, { likes: likes });
       }
+
+      else { 
+        const index = likes.indexOf(email);
+        likes.splice(index, 1);
+        
+        await updateDoc(postRef, { likes: likes });
+      }
     }
   } catch (error) {
     console.error('Error al dar "me gusta" a la publicación:', error);

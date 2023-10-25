@@ -155,6 +155,9 @@ export const renderWall = () => {
       imgDelete.src = '../imgs/delete.png';
       divActions.appendChild(imgDelete);
       imgDelete.addEventListener('click', () => {
+        if (window.confirm("Do you really want to leave?")) {
+          
+        }
         const postId = doc.id; // Obtener el ID del post que se eliminará
         deletePost(postId).then(() => {
           liCard.remove();
