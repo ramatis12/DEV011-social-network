@@ -49,26 +49,22 @@ export const renderRegister = () => {
     e.preventDefault();
     const password1 = document.querySelector('.input-pwd-register').value;
     const password2 = document.querySelector('.input-pwd-confirm').value;
-    console.log(password1,password2);
+    console.log(password1, password2);
     if (password1 === password2) {
-
-
-  
-    try {
-      const route = await emailAuthentication(inputUser.value, inputPwd.value);
-      if (route) {
-        window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
-        
+      try {
+        const route = await emailAuthentication(inputUser.value, inputPwd.value);
+        if (route) {
+          window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
+        }
+      } catch (error) {
+        alert('Error al registrar usuario:', error);
+        inputUser.value = '';
+        inputPwd.value = '';
+        inputPwdConfirm.value = '';
       }
-    } catch (error) {
-      alert('Error al registrar usuario:', error);
-      inputUser.value = '';
-      inputPwd.value = '';
-      inputPwdConfirm.value = '';
+    } else {
+      alert('Las contraseñas no coinciden');
     }
-  } else {
-    alert('Las contraseñas no coinciden');
-  }
   });
 
   return divRegister;
