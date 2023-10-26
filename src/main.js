@@ -16,7 +16,7 @@ const routes = [
 const defaultRoute = '/';
 const root = document.getElementById('root');
 
-function navigateTo(path) {
+export function navigateTo(path) {
   const route = routes.find((routeFound) => routeFound.path === path);
 
   if (route && route.component) {
@@ -47,5 +47,3 @@ if (window.location.pathname === '/') {
 } else {
   navigateTo(defaultRoute);
 }
-
-// navigateTo(window.location.pathname || defaultRoute);
