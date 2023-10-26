@@ -134,12 +134,10 @@ export async function likePost(postId) {
 
         // Actualiza el campo "likes" en Firestore
         await updateDoc(postRef, { likes: likes });
-      }
-
-      else { 
+      } else {
         const index = likes.indexOf(email);
         likes.splice(index, 1);
-        
+
         await updateDoc(postRef, { likes: likes });
       }
     }

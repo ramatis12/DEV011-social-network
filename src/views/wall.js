@@ -145,7 +145,7 @@ export const renderWall = () => {
       imgHeart.addEventListener('click', () => {
         console.log('Funciono');
         const postId = doc.id;
-        const email = doc.data().email;
+        // const email = doc.data().email;
         console.log(postId);
         console.log(email);
         likePost(postId, email);
@@ -156,16 +156,18 @@ export const renderWall = () => {
       imgDelete.src = '../imgs/delete.png';
       divActions.appendChild(imgDelete);
       imgDelete.addEventListener('click', () => {
-        if (window.confirm("Este post irá a la caja de arena, seguro que deseas eliminarlo?")) {
-          
-        
-        const postId = doc.id; // Obtener el ID del post que se eliminará
-        deletePost(postId).then(() => {
-          liCard.remove();
-        }).catch((error) => {
-          console.error('Error al eliminar el post:', error);
-        });
-      }
+        if (email === currentEmail) {
+          if (window.confirm('Este post irá a la caja de arena, seguro que deseas eliminarlo?')) {
+            const postId = doc.id; // Obtener el ID del post que se eliminará
+            deletePost(postId).then(() => {
+              liCard.remove();
+            }).catch((error) => {
+              console.error('Error al eliminar el post:', error);
+            });
+          }
+        } else {
+          alert('No eres el propietario de este post, así que no puedes eliminarlo');
+        }
       });
     });
   });
