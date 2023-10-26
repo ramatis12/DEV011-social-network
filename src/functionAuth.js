@@ -1,5 +1,9 @@
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { collection, addDoc, getDocs, onSnapshot, orderBy, query, doc, deleteDoc, getDoc, updateDoc } from 'firebase/firestore';
+import {
+  GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+} from 'firebase/auth';
+import {
+  collection, addDoc, getDocs, onSnapshot, orderBy, query, doc, deleteDoc, getDoc, updateDoc,
+} from 'firebase/firestore';
 import { auth, db } from './conectionFirebase.js';
 
 // import { router } from './router.js';
@@ -28,8 +32,8 @@ export function emailAuthentication(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((currentUser) => {
         const user = currentUser.user;
-        const userId = user.uid;
-        const userEmail = user.email;
+        // const userId = user.uid;
+        // const userEmail = user.email;
         alert(`Usuario creado ${user}`);
         resolve('/muro');
       })
@@ -133,11 +137,13 @@ export async function likePost(postId) {
         likes.push(email);
 
         // Actualiza el campo "likes" en Firestore
+        // eslint-disable-next-line object-shorthand
         await updateDoc(postRef, { likes: likes });
       } else {
         const index = likes.indexOf(email);
         likes.splice(index, 1);
 
+        // eslint-disable-next-line object-shorthand
         await updateDoc(postRef, { likes: likes });
       }
     }
@@ -159,5 +165,6 @@ auth.onAuthStateChanged((user) => {
 
 export async function editPost(postId, text) {
   const postRef = doc(db, 'posts', postId);
+  // eslint-disable-next-line object-shorthand
   await updateDoc(postRef, { text: text });
 }

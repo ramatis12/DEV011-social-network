@@ -4,7 +4,7 @@ export const createPost = () => {
   const divCreatePost = document.createElement('div');
   divCreatePost.setAttribute('id', 'div-create-post');
 
-  const form = document.createElement ('form');
+  const form = document.createElement('form');
   divCreatePost.appendChild(form);
 
   const urlImg = document.createElement('input');

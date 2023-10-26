@@ -1,4 +1,6 @@
-import { paintRealTime, deletePost, likePost, editPost } from '../functionAuth.js';
+import {
+  paintRealTime, deletePost, likePost, editPost,
+} from '../functionAuth.js';
 
 export const renderWall = () => {
   document.querySelector('header').style.display = 'none';
