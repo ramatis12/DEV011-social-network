@@ -59,23 +59,9 @@ export function login(email, password) {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user, 'desde el then');
-        resolve('/muro');
-      // resolve(user);
-      // return user
+        resolve(userCredential);
       }) // ...
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/user-not-found') {
-        // El usuario no está registrado, muestra una alerta y redirige a la página de registro.
-          alert('Usuario no registrado. Por favor, regístrate.');
-          window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/registro' }));
-        } else {
-        // Otro tipo de error, puedes manejarlo de acuerdo a tus necesidades.
-          console.error('Error en el inicio de sesión:', errorMessage);
-        // Aquí podrías mostrar una alerta personalizada si lo deseas.
-        }
         reject(error);
       });
   });
@@ -83,7 +69,7 @@ export function login(email, password) {
 
 const postCollection = collection(db, 'posts');
 export const addPost = (text, imagen) => {
-  const user = auth.currentUser;
+ // const user = auth.currentUser;
   const userEmail = user.email;
   addDoc(postCollection, {
     text,
