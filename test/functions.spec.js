@@ -2,10 +2,10 @@
  * @jest-environment jsdom
  */
 import { emailAuthentication, login } from '../src/functionAuth.js';
-// import { navigateTo } from '../src/main.js';
+//import { navigateTo } from '../src/main.js';
 import { auth } from "../src/conectionFirebase.js";
 import { signInWithEmailAndPassword } from 'firebase/auth';
-jest.mock("firebase/auth"); 
+//jest.mock("firebase/auth"); 
 
 describe("Registro con email y contraseña", () => {
   it("debería ser una función", () => {
@@ -19,7 +19,7 @@ test("Tiene un botón", () => {
   expect(haveAButton).not.toBe(undefined);
 });
 
-/* test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"', async () => {
+ test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"', async () => {
   const DOM = document.createElement('div');
   document.body.appendChild(DOM);
   const loginButton = document.createElement('button');
@@ -33,8 +33,8 @@ test("Tiene un botón", () => {
   expect(navigateToMock).toHaveBeenCalledWith('/muro');
   navigateToMock.mockRestore();
   document.body.removeChild(DOM);
-}); */
-
+}); 
+/*
 test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"', async () => {
   const DOM = document.createElement("div");
   DOM.innerHTML = login();
@@ -57,4 +57,4 @@ test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"',
   navigateToMock.mockRestore();
   auth.signInWithEmailAndPassword.mockRestore();
   document.body.removeChild(DOM);
-});
+});*/

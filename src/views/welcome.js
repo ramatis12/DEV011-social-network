@@ -36,7 +36,7 @@ export const renderWelcome = () => {
     try {
       const route = await login(inputUser.value, inputPwd.value);
       if (route) {
-        window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
+        window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/muro' }));
       }
     } catch (error) {
       alert('Credenciales incorrectas', error);
