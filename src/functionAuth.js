@@ -17,7 +17,7 @@ export function logInGoogle() {
         // El usuario ha iniciado sesión con Google exitosamente.
         const user = result.user;
         console.log('Usuario autenticado:', user);
-        resolve('/muro'); // Resolvemos la promesa con el usuario
+        resolve(); // Resolvemos la promesa con el usuario
       })
       .catch((error) => {
         // Ocurrió un error durante el proceso de inicio de sesión.
@@ -69,7 +69,7 @@ export function login(email, password) {
 
 const postCollection = collection(db, 'posts');
 export const addPost = (text, imagen) => {
- // const user = auth.currentUser;
+  const user = auth.currentUser;
   const userEmail = user.email;
   addDoc(postCollection, {
     text,

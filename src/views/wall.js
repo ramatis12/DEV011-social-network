@@ -2,8 +2,11 @@ import {
   paintRealTime, deletePost, likePost, editPost,
 } from '../functionAuth.js';
 
-export const renderWall = () => {
-  document.querySelector('header').style.display = 'none';
+export const renderWall = (navigateTo) => {
+  const header = document.querySelector('header');
+  if (header !== null) {
+    header.style.display = 'none';
+  }
 
   const divContainer = document.createElement('div');
   divContainer.setAttribute('id', 'div-container');
@@ -22,7 +25,7 @@ export const renderWall = () => {
   divMenu.appendChild(postOption);
 
   postOption.addEventListener('click', () => {
-    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/crear_post' }));
+    navigateTo('/crear_post');
   });
 
   const logout = document.createElement('img');
@@ -31,7 +34,7 @@ export const renderWall = () => {
   divMenu.appendChild(logout);
 
   logout.addEventListener('click', () => {
-    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/' }));
+    navigateTo('/');
   });
 
   const divPosts = document.createElement('div');

@@ -1,6 +1,6 @@
 import { logInGoogle, login } from '../functionAuth.js';
 
-export const renderWelcome = () => {
+export const renderWelcome = (navigateTo) => {
   document.querySelector('header').style.display = 'block';
   const divWelcome = document.createElement('div');
   divWelcome.setAttribute('id', 'div-welcome');
@@ -34,10 +34,8 @@ export const renderWelcome = () => {
   loginButton.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-      const route = await login(inputUser.value, inputPwd.value);
-      if (route) {
-        window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/muro' }));
-      }
+      await login(inputUser.value, inputPwd.value);
+      navigateTo('/muro');
     } catch (error) {
       alert('Credenciales incorrectas', error);
       inputUser.value = '';
@@ -62,7 +60,7 @@ export const renderWelcome = () => {
   divWelcome.appendChild(registerButtonWelcome);
 
   registerButtonWelcome.addEventListener('click', () => {
-    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/registro' }));
+    navigateTo('/registro');
   });
 
   const googleRegisterButton = document.createElement('button');
@@ -77,8 +75,8 @@ export const renderWelcome = () => {
 
   googleRegisterButton.addEventListener('click', async () => {
     try {
-      const route = await logInGoogle();
-      window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
+      await logInGoogle();
+      navigateTo('/muro');
     } catch (error) {
       console.error('Error en inico de sesión con Google', error);
     }

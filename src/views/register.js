@@ -1,6 +1,6 @@
 import { emailAuthentication } from '../functionAuth.js';
 
-export const renderRegister = () => {
+export const renderRegister = (navigateTo) => {
   const divRegister = document.createElement('div');
   divRegister.setAttribute('id', 'div-register');
 
@@ -31,14 +31,6 @@ export const renderRegister = () => {
   inputPwdConfirm.value = '';
   registerForm.appendChild(inputPwdConfirm);
 
-  // const inputBirthdate = document.createElement("input");
-  // inputBirthdate.setAttribute("type", "date");
-  // inputBirthdate.classList.add("input-date");
-  // inputBirthdate.setAttribute("placeholder", "Fecha de nacimiento");
-  // inputBirthdate.value = "";
-
-  // registerForm.appendChild(inputBirthdate);
-
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button-1');
   registerButton.textContent = 'Registrarse';
@@ -52,10 +44,8 @@ export const renderRegister = () => {
     console.log(password1, password2);
     if (password1 === password2) {
       try {
-        const route = await emailAuthentication(inputUser.value, inputPwd.value);
-        if (route) {
-          window.dispatchEvent(new CustomEvent('navigateTo', { detail: route }));
-        }
+        await emailAuthentication(inputUser.value, inputPwd.value);
+        navigateTo('/muro');
       } catch (error) {
         alert('Error al registrar usuario:', error);
         inputUser.value = '';
