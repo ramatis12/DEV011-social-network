@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { emailAuthentication, login } from '../src/functionAuth.js';
+import { emailAuthentication, login, onAuthStateChanged } from '../src/functionAuth.js';
 // import { navigateTo } from '../src/main.js';
 import { auth } from "../src/conectionFirebase.js";
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -39,7 +39,7 @@ test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"',
   const DOM = document.createElement("div");
   DOM.innerHTML = login();
   document.body.appendChild(DOM);
-  const loginButton = DOM.querySelector(".login-button");
+  const loginButton = DOM.querySelector(".button");
   const navigateToMock = jest.spyOn(window, "dispatchEvent");
   const expectedRoute = "/muro";
   const loginPromise = Promise.resolve(expectedRoute);
