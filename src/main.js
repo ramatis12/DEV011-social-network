@@ -29,7 +29,7 @@ export function navigateTo(path) {
     if (root.firstChild) {
       root.removeChild(root.firstChild);
     }
-    root.appendChild(route.component());
+    root.appendChild(route.component(navigateTo));
   } else {
     navigateTo('/error');
   }
@@ -38,12 +38,14 @@ window.onpopstate = () => {
   navigateTo(window.location.pathname);
 };
 
-window.addEventListener('navigateTo', (event) => {
-  navigateTo(event.detail);
-});
+navigateTo(window.location.pathname || defaultRoute);
 
-if (window.location.pathname === '/') {
-  navigateTo('/');
-} else {
-  navigateTo(defaultRoute);
-}
+// window.addEventListener('navigateTo', (event) => {
+//   navigateTo(event.detail);
+// });
+
+// if (window.location.pathname === '/') {
+//   navigateTo('/');
+// } else {
+//   navigateTo(defaultRoute);
+// }

@@ -1,6 +1,6 @@
 import { addPost } from '../functionAuth.js';
 
-export const createPost = () => {
+export const createPost = (navigateTo) => {
   const divCreatePost = document.createElement('div');
   divCreatePost.setAttribute('id', 'div-create-post');
 
@@ -34,7 +34,7 @@ export const createPost = () => {
     addPost(text.value, imagen.value);
     text.value = '';
     imagen.value = '';
-    window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/muro' }));
+    navigateTo('/muro');
   });
 
   return divCreatePost;
