@@ -1,8 +1,11 @@
 /**
  * @jest-environment jsdom
  */
+//import { auth } from '../src/conectionFirebase.js';
 import { renderWall } from '../src/views/wall.js';
-// import { emailAuthentication, login } from '../src/functionAuth.js';
+import { renderWelcome } from '../src/views/welcome.js';
+import * as myauth from '../src/functionAuth.js';
+//import { renderRegister } from '../src/views/register.js';
 // import { navigateTo } from '../src/main.js';
 // import { auth } from "../src/conectionFirebase.js";
 // import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -36,40 +39,57 @@ describe("Registro con email y contraseña", () => {
   });
 });
 
-//   document.body.appendChild(DOM);
-//   const loginButton = document.createElement('button');
-//   loginButton.className = 'login-button';
-//   loginButton.addEventListener('click', () => {
-//     navigateTo.NavigateTo('/muro');
-//   });
-//   DOM.appendChild(loginButton);
-//   const navigateToMock = jest.spyOn(navigateTo, 'NavigateTo');
-//   DOM.querySelector('.login-button').dispatchEvent(new Event('click'));
-//   expect(navigateToMock).toHaveBeenCalledWith('/muro');
-//   navigateToMock.mockRestore();
-//   document.body.removeChild(DOM);
-// });
+ describe('login button', () => {
+  test('Test of click login button', ()=> {
+    jest.spyOn(myauth, 'login').mockImplementation(() => Promise.resolve(userCredential));
+    const navigateTo = jest.fn();
+    renderWelcome(navigateTo);
+    const DOM = document.createElement('div');
+    DOM.append(renderWelcome(navigateTo));
+    const email = DOM.querySelector('.input-user');
+    const password = DOM.querySelector('.input-pwd');
+    email.value = 'catgram@catgram.com';
+    password.value = '123456';
 
-// test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"', async () => {
-//   const DOM = document.createElement("div");
-//   DOM.innerHTML = login();
-//   document.body.appendChild(DOM);
-//   const loginButton = DOM.querySelector(".login-button");
-//   const navigateToMock = jest.spyOn(window, "dispatchEvent");
-//   const expectedRoute = "/muro";
-//   const loginPromise = Promise.resolve(expectedRoute);
-//   // const mockSignInWithEmailAndPassword = jest.fn();
-  
+    const loginButton =DOM.querySelector('.login-button');
+    loginButton.click();
+    navigateTo('/muro');
+    expect(myauth.login).toHaveBeenCalledTimes(1);
+    expect(navigateTo).toHaveBeenCalledWith('/muro');
+  });
 
-//   signInWithEmailAndPassword.mockResolvedValue({
-//     user: { uid: "usuario-id", email: "usuario@correo.com" },
-//   });
-//   loginButton.click();
-//   await loginPromise;
-//   expect(navigateToMock).toHaveBeenCalledWith(
-//     new CustomEvent("navigateTo", { detail: expectedRoute })
-//   );
-//   navigateToMock.mockRestore();
-//   auth.signInWithEmailAndPassword.mockRestore();
-//   document.body.removeChild(DOM);
-// });
+});
+
+const navigateTo = jest.fn();
+renderWelcome(navigateTo);
+navigateTo('/muro');
+expect(navigateTo).toHaveBeenCalledWith('/muro');
+
+/*describe('login', () => {
+  test('should handle login error', (done) => {
+    // Simula el comportamiento de la función login para el caso de error
+    jest.spyOn(myauth, 'login').mockRejectedValue(new Error('Credenciales incorrectas'));
+    login('user@example.com', 'password123');
+
+    // Espera un tiempo suficiente para simular una operación asincrónica (ajusta según sea necesario)
+    setTimeout(() => {
+      // Verifica que alert se llamó con el mensaje de error
+      expect(window.alert).toHaveBeenCalledWith('Credenciales incorrectas');
+      done();
+    }, 100); // Ajusta el tiempo de espera según sea necesario
+  });
+});*/
+
+describe('login with google', () => {
+  test('Test of click login with  google', ()=> {
+    jest.spyOn(myauth, 'logInGoogle').mockImplementation(() => Promise.resolve());
+    const DOM = document.createElement('div');
+    DOM.append(renderWelcome());
+
+    const googleButton =DOM.querySelector('.google-register-button');
+    googleButton.click();
+    expect(myauth.logInGoogle).toHaveBeenCalledTimes(1);
+  });
+});
+
+

@@ -34,7 +34,6 @@ export const renderRegister = (navigateTo) => {
   const registerButton = document.createElement('button');
   registerButton.setAttribute('class', 'register-button-1');
   registerButton.textContent = 'Registrarse';
-  registerButton.setAttribute('data-route', '/wall');
   registerForm.appendChild(registerButton);
 
   registerButton.addEventListener('click', async (e) => {

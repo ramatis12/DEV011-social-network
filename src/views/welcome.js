@@ -1,7 +1,10 @@
 import { logInGoogle, login } from '../functionAuth.js';
 
 export const renderWelcome = (navigateTo) => {
-  document.querySelector('header').style.display = 'block';
+  const header = document.querySelector('header');
+  if (header !== null) {
+    header.style.display = 'none';
+  }
   const divWelcome = document.createElement('div');
   divWelcome.setAttribute('id', 'div-welcome');
 
