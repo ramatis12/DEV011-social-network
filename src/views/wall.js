@@ -48,8 +48,6 @@ export const renderWall = (navigateTo) => {
   paintRealTime((querySnapshot) => {
     ulCard.textContent = '';
     querySnapshot.forEach((doc) => {
-      console.log(doc.id);
-      // console.log(doc.data());
       const ul = divContainer.querySelector('#ul-card');
       const liCard = document.createElement('li');
       liCard.setAttribute('id', 'li-card');
