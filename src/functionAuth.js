@@ -17,7 +17,7 @@ export function logInGoogle() {
         // El usuario ha iniciado sesión con Google exitosamente.
         const user = result.user;
         console.log('Usuario autenticado:', user);
-        resolve('/muro'); // Resolvemos la promesa con el usuario
+        resolve(); // Resolvemos la promesa con el usuario
       })
       .catch((error) => {
         // Ocurrió un error durante el proceso de inicio de sesión.
@@ -35,7 +35,7 @@ export function emailAuthentication(email, password) {
         // const userId = user.uid;
         // const userEmail = user.email;
         alert(`Usuario creado ${user}`);
-        resolve('/muro');
+        resolve( );
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -59,23 +59,9 @@ export function login(email, password) {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user, 'desde el then');
-        resolve('/muro');
-      // resolve(user);
-      // return user
+        resolve(userCredential);
       }) // ...
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/user-not-found') {
-        // El usuario no está registrado, muestra una alerta y redirige a la página de registro.
-          alert('Usuario no registrado. Por favor, regístrate.');
-          window.dispatchEvent(new CustomEvent('navigateTo', { detail: '/registro' }));
-        } else {
-        // Otro tipo de error, puedes manejarlo de acuerdo a tus necesidades.
-          console.error('Error en el inicio de sesión:', errorMessage);
-        // Aquí podrías mostrar una alerta personalizada si lo deseas.
-        }
         reject(error);
       });
   });
