@@ -40,7 +40,7 @@ export const renderRegister = (navigateTo) => {
     e.preventDefault();
     const password1 = document.querySelector('.input-pwd-register');
     const password2 = document.querySelector('.input-pwd-confirm');
-    console.log(password1, password2);
+    // console.log(password1, password2);
     if (password1.value === password2.value) {
       try {
         await emailAuthentication(inputUser.value, inputPwd.value);
