@@ -3,7 +3,7 @@ import { logInGoogle, login } from '../functionAuth.js';
 export const renderWelcome = (navigateTo) => {
   const header = document.querySelector('header');
   if (header !== null) {
-    header.style.display = 'none';
+    header.style.display = 'block';
   }
   const divWelcome = document.createElement('div');
   divWelcome.setAttribute('id', 'div-welcome');
@@ -81,7 +81,7 @@ export const renderWelcome = (navigateTo) => {
       await logInGoogle();
       navigateTo('/muro');
     } catch (error) {
-      console.error('Error en inico de sesión con Google', error);
+      //console.error(error);
     }
   });
   return divWelcome;
