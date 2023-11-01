@@ -4,7 +4,6 @@
 import { renderWall } from '../src/views/wall.js';
 import * as myauth from '../src/functionAuth.js';
 
-
 describe("Renderizado de muro, cerrar sesion, tiene un boton", () => {
   test("debería ser una función", () => {
     expect(typeof renderWall).toBe("function");
@@ -31,7 +30,6 @@ describe("Renderizado de muro, cerrar sesion, tiene un boton", () => {
     expect(navigateTo).toHaveBeenCalledWith('/');
   });
 });
-
 
 describe("NavigateTo nuevo post", () => {
   test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo nuevo post"', () => {
@@ -62,7 +60,7 @@ describe('Pruebas para paintRealTime', () => {
     const liCard = document.createElement('li');
     liCard.setAttribute('id', 'li-card');
     ulCard.appendChild(liCard);
-    console.log(liCard);
+    // console.log(liCard);
   });
 
   afterEach(() => {
@@ -78,7 +76,7 @@ it('debería crear elementos liCard en ulCard', () => {
 
     // Llama a la función paintRealTime con el querySnapshot
    const prueba = myauth.paintRealTime(querySnapshot);
-console.log(prueba);
+// console.log(prueba);
     // Verifica que ulCard contenga elementos liCard
     const ulCard = document.getElementById('#ul-card');
 

@@ -35,7 +35,7 @@ export function emailAuthentication(email, password) {
         // const userId = user.uid;
         // const userEmail = user.email;
         alert(`Usuario creado ${user}`);
-        resolve( );
+        resolve(user);
       })
       .catch((error) => {
         const errorCode = error.code;

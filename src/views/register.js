@@ -38,10 +38,10 @@ export const renderRegister = (navigateTo) => {
 
   registerButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    const password1 = document.querySelector('.input-pwd-register');
-    const password2 = document.querySelector('.input-pwd-confirm');
+    //const password1 = document.querySelector('.input-pwd-register');
+    //const password2 = document.querySelector('.input-pwd-confirm');
     // console.log(password1, password2);
-    if (password1.value === password2.value) {
+    if (inputPwd.value === inputPwdConfirm.value) {
       try {
         await emailAuthentication(inputUser.value, inputPwd.value);
         navigateTo('/muro');
