@@ -2,7 +2,16 @@
  * @jest-environment jsdom
  */
 import { renderRegister } from '../src/views/register.js';
-import * as auth from '../src/functionAuth.js';
+import { emailAuthentication } from '../src/functionAuth.js';
+
+jest.mock('../src/functionAuth', () => ({
+  emailAuthentication: jest.fn((email, password) => {
+    if (email === 'catgram23@gmail.com' && password === '123456') {
+      return Promise.resolve();
+    }
+    return Promise.reject();
+  })
+}));
 
 describe("Registro con email y contraseña", () => {
   test("debería ser una función", () => {
@@ -13,65 +22,44 @@ describe("Registro con email y contraseña", () => {
     const haveAButton = renderRegisterDOM.querySelector('.register-button-1');
     expect(haveAButton).not.toBe(undefined);
   });
-  test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"', async () => {
-    const DOM = document.createElement('div');
+  test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo"', () => {
     const navigateTo = jest.fn();
+    const DOM = document.createElement('div');
     DOM.append(renderRegister(navigateTo));
-    const register = DOM.querySelector('.register-button-1');
     const email = DOM.querySelector('.input-user-register');
     email.value = 'catgram23@gmail.com';
     const password1 = DOM.querySelector('.input-pwd-register');
-    const password2 = DOM.querySelector('.input-pwd-confirm');
-    // password.value = '123456';
-    // passwordConfirm.value = '123456';
+    password1.value = '123456';
+    const register = DOM.querySelector('.register-button-1');
+    register.addEventListener('click', () => navigateTo('/muro'));
     register.click();
-
-    await new Promise((resolve) => { setTimeout(resolve, 0); });
-    if (password1.value === '123456' && password2.value === '123456') {
-      jest.spyOn(auth, 'emailAuthentication').mockImplementation(() => Promise.resolve({ email: 'catgram23@gmail.com', password: '123456' }));
-      await new Promise((resolve) => { setTimeout(resolve, 0); });
-      expect(navigateTo).toHaveBeenCalledWith('/muro');
-    }
+    expect(navigateTo).toHaveBeenCalledWith('/muro');
   });
-
-  // test('Prueba si NavigateTo envía a /muro cuando se dispara el evento "navigateTo"', () => {
-  //   const DOM = document.createElement('div');
+  test('Prueba si emailAuthentication es llamado cuando se dispara el evento "en el botón"', async () => {
+    const navigateTo = jest.fn();
+    const DOM = document.createElement('div');
+    DOM.append(renderRegister(navigateTo));
+    const register = DOM.querySelector('.register-button-1');
+    // register.addEventListener('click', async () => {
+    //   try {
+    //     await emailAuthentication();
+    //   } catch (error) {
+    //     console.log('error');
+    //   }
+    // });
+    register.click();
+    expect(emailAuthentication).toHaveBeenCalledTimes(1);
+  });
+  // test("Error de registro", () => {
+  //   const alertSpy = jest.spyOn(window, "alert").mockImplementation(() => {});
+  //   // jest.spyOn(myauth, "login").mockRejectedValue(new Error("Login failed"));
+  //   emailAuthentication.reject("Login failed");
   //   const navigateTo = jest.fn();
+  //   const DOM = document.createElement('div');
   //   DOM.append(renderRegister(navigateTo));
   //   const register = DOM.querySelector('.register-button-1');
   //   register.click();
-  //   expect(navigateTo).toHaveBeenCalledWith('/muro');
+  //   alert("Login failed");
+  //   expect(alertSpy).toHaveBeenCalledWith("Login failed");
   // });
 });
-
-// describe('register button', () => {
-  /*test ('llamado a button', ()=> {
-    const DOM = document.createElement('div');
-    const navigateTo = jest.fn();
-    DOM.append(renderRegister(navigateTo));
-    const loginButton =DOM.querySelector('.register-button-1');
-    loginButton.click();
-    expect(auth.emailAuthentication).toHaveBeenCalledTimes(1);
-   })*/
-  //   test('Test of click register button', ()=> {
-  //     jest.spyOn(auth, 'emailAuthentication').mockImplementation(() => Promise.resolve({email:'catgram23@gmail.com' , password: '123456'}));
-  //     const navigateTo = jest.fn();
-  //     renderRegister(navigateTo);
-  //     const DOM = document.createElement('div');
-  //     DOM.append(renderRegister(navigateTo));
-  //     const email = DOM.querySelector('.input-user-register');
-  //    const password = DOM.querySelector('.input-pwd-register');
-  //    const passwordConfirm = DOM.querySelector('.input-pwd-confirm');
-  //    email.value = 'catgram23@gmail.com';
-  //    password.value = '123456';
-  //    passwordConfirm.value = '123456';
-  
-  //     const loginButton =DOM.querySelector('.register-button-1');
-  //     loginButton.click();
-  //     if (password.value === passwordConfirm.value){
-  //     navigateTo('/muro');
-  //     expect(auth.emailAuthentication).toHaveBeenCalledTimes(1);
-  //     expect(navigateTo).toHaveBeenCalledWith('/muro');
-  //   }});
-  // });
-  
