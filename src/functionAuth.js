@@ -17,7 +17,7 @@ export function logInGoogle() {
         // El usuario ha iniciado sesión con Google exitosamente.
         const user = result.user;
         console.log('Usuario autenticado:', user);
-        resolve(); // Resolvemos la promesa con el usuario
+        resolve(user); // Resolvemos la promesa con el usuario
       })
       .catch((error) => {
         // Ocurrió un error durante el proceso de inicio de sesión.
