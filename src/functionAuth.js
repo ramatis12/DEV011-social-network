@@ -16,12 +16,12 @@ export function logInGoogle() {
       .then((result) => {
         // El usuario ha iniciado sesión con Google exitosamente.
         const user = result.user;
-        console.log('Usuario autenticado:', user);
+        // console.log('Usuario autenticado:', user);
         resolve(user); // Resolvemos la promesa con el usuario
       })
       .catch((error) => {
         // Ocurrió un error durante el proceso de inicio de sesión.
-        console.error('Error de autenticación con Google:', error);
+        // console.error('Error de autenticación con Google:', error);
         reject(error); // Rechazamos la promesa con el error
       });
   });
