@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-//import { auth } from '../src/conectionFirebase.js';
+// import { auth } from '../src/conectionFirebase.js';
 import { renderWall } from '../src/views/wall.js';
 import { renderWelcome } from '../src/views/welcome.js';
 import * as myauth from '../src/functionAuth.js';
-//import { renderRegister } from '../src/views/register.js';
+// import { renderRegister } from '../src/views/register.js';
 // import { navigateTo } from '../src/main.js';
 // import { auth } from "../src/conectionFirebase.js";
 // import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -39,8 +39,8 @@ describe("Registro con email y contraseña", () => {
   });
 });
 
- describe('login button', () => {
-  test('Test of click login button', ()=> {
+describe('login button', () => {
+  test('Test of click login button', () => {
     jest.spyOn(myauth, 'login').mockImplementation(() => Promise.resolve(userCredential));
     const navigateTo = jest.fn();
     renderWelcome(navigateTo);
@@ -57,7 +57,6 @@ describe("Registro con email y contraseña", () => {
     expect(myauth.login).toHaveBeenCalledTimes(1);
     expect(navigateTo).toHaveBeenCalledWith('/muro');
   });
-
 });
 
 const navigateTo = jest.fn();
@@ -81,15 +80,13 @@ expect(navigateTo).toHaveBeenCalledWith('/muro');
 });*/
 
 describe('login with google', () => {
-  test('Test of click login with  google', ()=> {
+  test('Test of click login with  google', () => {
     jest.spyOn(myauth, 'logInGoogle').mockImplementation(() => Promise.resolve());
     const DOM = document.createElement('div');
     DOM.append(renderWelcome());
 
-    const googleButton =DOM.querySelector('.google-register-button');
+    const googleButton = DOM.querySelector('.google-register-button');
     googleButton.click();
     expect(myauth.logInGoogle).toHaveBeenCalledTimes(1);
   });
 });
-
-
