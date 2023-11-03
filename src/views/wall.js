@@ -50,7 +50,7 @@ export const renderWall = (navigateTo) => {
     querySnapshot.forEach((doc) => {
       const ul = divContainer.querySelector('#ul-card');
       const liCard = document.createElement('li');
-      liCard.setAttribute('id', 'li-card');
+      liCard.setAttribute('class', 'li-card');
       ul.appendChild(liCard);
 
       const divDescription = document.createElement('div');

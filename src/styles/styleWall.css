@@ -57,7 +57,7 @@
     margin-top: 1%;
 }
 
-#li-card{
+.li-card{
     width: 400px;
     margin: 0 10%;
     object-fit: contain;
@@ -152,7 +152,7 @@
 
 
 @media screen and (max-width: 520px) {
-    #li-card{
+    .li-card{
         height: 340px;
     }
     #div-description{
@@ -171,7 +171,7 @@
   }
 
   @media screen and (max-width: 420px) {
-    #li-card{
+    .li-card{
         height: 370px;
     }
     #counter{
@@ -180,7 +180,7 @@
   }
 
  @media screen and (max-width: 375px) {
-    #li-card{
+    .li-card{
         height: 340px;
     }
     #counter{
@@ -189,7 +189,7 @@
   } 
 
   @media screen and (min-width: 720px) {
-    #li-card{
+    .li-card{
         height: 380px;
     }
     #div-description{
