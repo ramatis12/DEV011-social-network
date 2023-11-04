@@ -26,7 +26,25 @@ describe("Boton para vista de registro", () => {
     registerButtonWelcome.click();
     expect(navigateTo).toHaveBeenCalledWith("/registro");
   });
+
+  test('Prueba que el botón de registro esté presente si el header no es nulo', () => {
+    const header = document.createElement('header');
+    const originalQuerySelector = document.querySelector;
+    document.querySelector = jest.fn((selector) => {
+      if (selector === 'header') {
+        return header;
+      }
+    });
+
+    const renderWelcomeDOM = renderWelcome();
+    const registerButtonWelcome = renderWelcomeDOM.querySelector(".register-button");
+    expect(registerButtonWelcome).not.toBe(null);
+
+    document.querySelector = originalQuerySelector; // Restaurar la función original para evitar efectos secundarios en otras pruebas
+  });
 });
+
+
 
 describe("login button", () => {
   test("Test of click login button", () => {
