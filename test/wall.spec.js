@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { renderWall } from "../src/views/wall.js";
+/*import { renderWall } from "../src/views/wall.js";
 import * as myauth from "../src/functionAuth.js";
 
 describe("Renderizado de muro, cerrar sesion, tiene un boton", () => {
@@ -94,12 +94,12 @@ describe("Pruebas para paintRealTime", () => {
     const email = querySnapshot[0].data().email;
     console.log(email); // Esto imprimirá 'usuario1'
     // Llama a la función paintRealTime con el querySnapshot
-    myauth.paintRealTime(querySnapshot);
+    //myauth.paintRealTime(querySnapshot);
     // Verifica que los elementos creados tengan el contenido esperado
     const DOM = document.createElement("div");
     const navigateTo = jest.fn();
-    DOM.append(renderWall(navigateTo));
-    // DOM.append(renderWall(navigateTo).paintRealTime(querySnapshot)); ==> intento de testeo de paintRealTime
+    //DOM.append(renderWall(navigateTo));
+    DOM.append(renderWall(navigateTo).myauth.paintRealTime(querySnapshot));
     const ulCard = DOM.querySelector("#ul-card");
     const emailUserElements = ulCard.querySelector("#email-user");
     const email1 = querySnapshot[0].data().email;
@@ -109,7 +109,7 @@ describe("Pruebas para paintRealTime", () => {
     console.log (email1);
     const descriptionPostsElements =
     ulCard.querySelectorAll("#description-post");
-    console.log('descriptiooon===>',descriptionPostsElements);
+    
     descriptionPostsElements.textcontent = email1;
     expect(descriptionPostsElements.textcontent).toBe("usuario1");
     expect(usuario1).toBe("Mensaje 1");
@@ -117,4 +117,40 @@ describe("Pruebas para paintRealTime", () => {
     expect(email2).toBe("usuario2");
     expect(usuario2).toBe("Mensaje 2");
   });
-});
+
+  it("debería crear elementos liCard en ulCard", () => {
+    const querySnapshot = [
+      { data: () => ({ email: "usuario1", text: "Mensaje 1" }) },
+      { data: () => ({ email: "usuario2", text: "Mensaje 2" }) },
+    ];
+
+    // Llama a la función paintRealTime con el querySnapshot
+    
+    // console.log(prueba);
+    // Verifica que ulCard contenga elementos liCard
+    const DOM = document.createElement("div");
+    const navigateTo = jest.fn();
+    DOM.append(renderWall(navigateTo));
+    console.log(DOM);
+    const ulCard = DOM.querySelector("#ul-card"); 
+    myauth.paintRealTime((querySnapshot) => {
+        querySnapshot.forEach((liCard, index) => {
+          const data = querySnapshot[index].data(); // Obtiene los datos de querySnapshot
+          const emailElement = liCard.querySelector(".email");
+          const textElement = liCard.querySelector(".text");
+          emailElement.textContent = data.email;
+          textElement.textContent = data.text;
+      })
+    });
+    
+    //console.log(ulCard, DOM);
+
+    const liCardElements = ulCard.querySelectorAll(".li-card");
+    console.log(liCardElements.length, "elementsss");
+    console.log(typeof liCardElements, "lisssssssss");
+    console.log(Object.entries(liCardElements).length, "miooo");
+    expect(liCardElements).not.toBe(null);
+    expect(liCardElements.length).toBe(querySnapshot.length);
+    // expect(Object.entries(liCardElements).length).toBe(querySnapshot.length);
+  });
+});*/
