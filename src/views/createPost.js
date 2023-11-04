@@ -15,6 +15,9 @@ export const createPost = (navigateTo) => {
   urlImg.value = '';
   form.appendChild(urlImg);
 
+  urlImg.addEventListener('blur', () => {
+  
+});
   const textArea = document.createElement('textarea');
   textArea.setAttribute('id', 'text-area');
   textArea.setAttribute('placeholder', 'Escribe en 140 palabras un encabezado para tu foto:');
@@ -31,10 +34,18 @@ export const createPost = (navigateTo) => {
     e.preventDefault();
     const text = divCreatePost.querySelector('#text-area');
     const imagen = divCreatePost.querySelector('#url-img');
+    const valor = urlImg.value;
+   if (valor === '') {
+    alert('El campo Url no puede estar vacío');
+  urlImg.focus(); 
+  } else {
+
+  
     addPost(text.value, imagen.value);
     text.value = '';
     imagen.value = '';
     navigateTo('/muro');
+  }
   });
 
   return divCreatePost;

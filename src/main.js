@@ -1,4 +1,3 @@
-// Este es el punto de entrada de tu aplicacion
 import { createPost } from './views/createPost.js';
 import { renderRegister } from './views/register.js';
 import { renderWall } from './views/wall.js';
@@ -39,13 +38,3 @@ window.onpopstate = () => {
 };
 
 navigateTo(window.location.pathname || defaultRoute);
-
-// window.addEventListener('navigateTo', (event) => {
-//   navigateTo(event.detail);
-// });
-
-// if (window.location.pathname === '/') {
-//   navigateTo('/');
-// } else {
-//   navigateTo(defaultRoute);
-// }

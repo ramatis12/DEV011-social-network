@@ -4,9 +4,7 @@ import {
 import {
   collection, addDoc, getDocs, onSnapshot, orderBy, query, doc, deleteDoc, getDoc, updateDoc,
 } from 'firebase/firestore';
-import { auth, db } from './conectionFirebase.js';
-
-// import { router } from './router.js';
+import { auth, db } from './lib/conectionFirebase.js';
 
 export function logInGoogle() {
   return new Promise((resolve, reject) => {
@@ -14,15 +12,11 @@ export function logInGoogle() {
 
     signInWithPopup(auth, provider)
       .then((result) => {
-        // El usuario ha iniciado sesión con Google exitosamente.
         const user = result.user;
-        // console.log('Usuario autenticado:', user);
-        resolve(user); // Resolvemos la promesa con el usuario
+        resolve(user); 
       })
       .catch((error) => {
-        // Ocurrió un error durante el proceso de inicio de sesión.
-        // console.error('Error de autenticación con Google:', error);
-        reject(error); // Rechazamos la promesa con el error
+        reject(error); 
       });
   });
 }
@@ -32,8 +26,6 @@ export function emailAuthentication(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((currentUser) => {
         const user = currentUser.user;
-        // const userId = user.uid;
-        // const userEmail = user.email;
         alert(`Usuario creado ${user}`);
         resolve(user);
       })
@@ -57,10 +49,9 @@ export function login(email, password) {
   return new Promise((resolve, reject) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         resolve(userCredential);
-      }) // ...
+      }) 
       .catch((error) => {
         reject(error);
       });
@@ -100,9 +91,8 @@ export const deletePost = async (postId) => {
 // -------------------------renderiza los post en tiempo real---------------------------------------
 export const paintRealTime = (callback) => onSnapshot(orderPost, callback);
 
-// Función para agregar "me gusta" a una publicación
+//---------------------- Función para agregar "me gusta" a una publicación--------------------------
 export async function likePost(postId) {
-  // Verificar si el usuario ya ha dado "me gusta" a esta publicación
   const user = auth.currentUser;
   const email = user.email;
   console.log(email);
@@ -116,14 +106,10 @@ export async function likePost(postId) {
       const postData = postSnapshot.data();
       const likes = postData.likes || [];
 
-      // Verificar si el usuario ya ha dado "me gusta"
       const userAlreadyLike = likes.includes(email);
 
       if (!userAlreadyLike) {
         likes.push(email);
-
-        // Actualiza el campo "likes" en Firestore
-        // eslint-disable-next-line object-shorthand
         await updateDoc(postRef, { likes: likes });
       } else {
         const index = likes.indexOf(email);
@@ -145,9 +131,7 @@ auth.onAuthStateChanged((user) => {
     console.log(email);
   }
 });
-// const user = auth.user;
 
-// localStorage.setItem('emailLogeado', user);
 
 export async function editPost(postId, text) {
   const postRef = doc(db, 'posts', postId);
