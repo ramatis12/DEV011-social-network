@@ -64,6 +64,8 @@
     height: 330px;
     border-radius: 5%;
     background-color: #F7CAE4;
+    display: grid;
+    grid-template-rows: 22.5% 64.5% 13%;
 }
 
 #div-description{
@@ -72,6 +74,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 20% 80%;
+    grid-row-start: 1;
+    grid-row-end: 1;
 }
 
 #email-user{
@@ -107,14 +111,21 @@
 
 #img-post-user{
     width: 100%;
+    max-height: 98%;
     object-fit: contain;
     margin: 0;
 }
 
 #div-actions{
-    height: 45px;
+    position: relative;
+    top: 5%;
+    height: 40px;
     display: grid;
-    grid-template-columns: 50% 50%;
+    /* grid-template-columns: 50% 50%; */
+    grid-row-start: 3;
+    grid-row-end: 4;
+    align-self: start;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #img-heart{
@@ -144,8 +155,8 @@
     width: 34px;
     margin: 2% 8% 0 0;
     justify-self: end;
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column-start: 3;
+    grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 1;
 }
@@ -161,7 +172,7 @@
   }
 
   @media screen and (min-width: 520px) {
-    #li-card{
+    .li-card{
         height: 370px;
         width: 340px;
     }

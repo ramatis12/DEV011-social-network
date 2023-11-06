@@ -13,10 +13,10 @@ export function logInGoogle() {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        resolve(user); 
+        resolve(user);
       })
       .catch((error) => {
-        reject(error); 
+        reject(error);
       });
   });
 }
@@ -91,7 +91,7 @@ export const deletePost = async (postId) => {
 // -------------------------renderiza los post en tiempo real---------------------------------------
 export const paintRealTime = (callback) => onSnapshot(orderPost, callback);
 
-//---------------------- Función para agregar "me gusta" a una publicación--------------------------
+// --------------------- Función para agregar "me gusta" a una publicación--------------------------
 export async function likePost(postId) {
   const user = auth.currentUser;
   const email = user.email;
@@ -110,6 +110,7 @@ export async function likePost(postId) {
 
       if (!userAlreadyLike) {
         likes.push(email);
+        // eslint-disable-next-line object-shorthand
         await updateDoc(postRef, { likes: likes });
       } else {
         const index = likes.indexOf(email);
@@ -131,7 +132,6 @@ auth.onAuthStateChanged((user) => {
     console.log(email);
   }
 });
-
 
 export async function editPost(postId, text) {
   const postRef = doc(db, 'posts', postId);
