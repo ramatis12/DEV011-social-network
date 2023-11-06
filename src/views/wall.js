@@ -73,31 +73,11 @@ export const renderWall = (navigateTo) => {
       editPosts.src = '../imgs/edit-text.png';
       divDescription.appendChild(editPosts);
 
-      // editPosts.addEventListener('click', () => {
-      //   const description = divContainer.querySelector('#description-post');
-      //   const input = document.createElement('input');
-      //   input.setAttribute('id', 'input-edit-post');
-      //   input.value = description.textContent;
-      //   description.parentNode.replaceChild(input, description);
-      //   document.querySelector('#button-acept').style.display = 'block';
-      // });
-
       const buttonAcept = document.createElement('button');
       buttonAcept.setAttribute('id', 'button-acept');
       buttonAcept.textContent = 'Aceptar';
       buttonAcept.style.display = 'none';
       divDescription.appendChild(buttonAcept);
-
-      // buttonAcept.addEventListener('click', () => {
-      //   const input = divContainer.querySelector('#input-edit-post');
-      //   const p = document.createElement('p');
-      //   p.setAttribute('id', 'description-post');
-      //   p.innerHTML = doc.data().text;
-      //   input.parentNode.replaceChild(p, input);
-      //   document.querySelector('#button-acept').style.display = 'none';
-      //   const postId = doc.id;
-      //   editPost(postId, );
-      // });
 
       const email = doc.data().email;
       const currentEmail = localStorage.getItem('emailLogeado');
@@ -146,11 +126,7 @@ export const renderWall = (navigateTo) => {
       divActions.appendChild(counter);
 
       imgHeart.addEventListener('click', () => {
-        console.log('Funciono');
         const postId = doc.id;
-        // const email = doc.data().email;
-        console.log(postId);
-        console.log(email);
         likePost(postId, email);
       });
 
@@ -161,11 +137,10 @@ export const renderWall = (navigateTo) => {
       imgDelete.addEventListener('click', () => {
         if (email === currentEmail) {
           if (window.confirm('Este post irá a la caja de arena, seguro que deseas eliminarlo?')) {
-            const postId = doc.id; // Obtener el ID del post que se eliminará
+            const postId = doc.id; 
             deletePost(postId).then(() => {
               liCard.remove();
             }).catch((error) => {
-              console.error('Error al eliminar el post:', error);
             });
           }
         } else {

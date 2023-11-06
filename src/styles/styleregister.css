@@ -36,10 +36,7 @@ html, body {
     .input-user-register, .input-pwd-register , .input-pwd-confirm , .input-date{
         margin: 1% 10% 1% 10%;
     }    
-    .register-button-1 {
-        /*margin: 1% 20% 1% 10%;*/
-
-    }
+   
     .form-register {
         display:grid;
         grid-template-rows: 10% 10% 10% 10% 10% ;

@@ -30,7 +30,6 @@ export const renderWelcome = (navigateTo) => {
 
   const loginButton = document.createElement('button');
   loginButton.setAttribute('class', 'login-button');
-  loginButton.setAttribute('data-route', '/wall');
   loginButton.textContent = 'Ingresar';
   welcome.appendChild(loginButton);
 
@@ -81,7 +80,7 @@ export const renderWelcome = (navigateTo) => {
       await logInGoogle();
       navigateTo('/muro');
     } catch (error) {
-      //console.error(error);
+    
     }
   });
   return divWelcome;
