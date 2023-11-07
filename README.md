@@ -30,6 +30,8 @@ Para el proyecto se definieron las siguientes historias de usuario:
 A partir de las historias de usuario realizamos prototipos de alta y baja fidelidad, a partir de los cuales realizamos los testeos de usabilidad.
 
 Prototipos de baja fidelidad:
+
+
 ![Alt text](image-1.png)
 
 Prototipos de alta fidelidad:
