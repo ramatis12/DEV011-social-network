@@ -32,6 +32,7 @@
 // });
 
 // describe("NavigateTo nuevo post", () => {
+// eslint-disable-next-line max-len
 //   test('Prueba si NavigateTo es llamado cuando se dispara el evento "navigateTo nuevo post"', () => {
 //     const DOM = document.createElement("div");
 //     const navigateTo = jest.fn();
@@ -40,6 +41,7 @@
 //     postOption.click();
 //     expect(navigateTo).toHaveBeenCalled();
 //   });
+// eslint-disable-next-line max-len
 //   test('Prueba si NavigateTo envía a /crear_post cuando se dispara el evento "navigateTo"', () => {
 //     const DOM = document.createElement("div");
 //     const navigateTo = jest.fn();
