@@ -1,6 +1,11 @@
 import {
   paintRealTime, deletePost, likePost, editPost,
 } from '../functionAuth.js';
+import uploadPic from '../imgs/upload pic.png';
+import logout from '../imgs/logout.png';
+import editDescription from '../imgs/edit-text.png';
+import heartIcon from '../imgs/heart.png';
+import deleteIcon from '../imgs/delete.png';
 
 export const renderWall = (navigateTo) => {
   const header = document.querySelector('header');
@@ -21,19 +26,19 @@ export const renderWall = (navigateTo) => {
 
   const postOption = document.createElement('img');
   postOption.setAttribute('id', 'img-post');
-  postOption.src = '../imgs/upload pic.png';
+  postOption.src = uploadPic;
   divMenu.appendChild(postOption);
 
   postOption.addEventListener('click', () => {
     navigateTo('/crear_post');
   });
 
-  const logout = document.createElement('img');
-  logout.setAttribute('id', 'logout');
-  logout.src = '../imgs/logout.png';
-  divMenu.appendChild(logout);
+  const logoutButton = document.createElement('img');
+  logoutButton.setAttribute('id', 'logout');
+  logoutButton.src = logout;
+  divMenu.appendChild(logoutButton);
 
-  logout.addEventListener('click', () => {
+  logoutButton.addEventListener('click', () => {
     navigateTo('/');
   });
 
@@ -70,7 +75,7 @@ export const renderWall = (navigateTo) => {
 
       const editPosts = document.createElement('img');
       editPosts.setAttribute('id', 'edit-posts');
-      editPosts.src = '../imgs/edit-text.png';
+      editPosts.src = editDescription;
       divDescription.appendChild(editPosts);
 
       const buttonAcept = document.createElement('button');
@@ -115,7 +120,7 @@ export const renderWall = (navigateTo) => {
 
       const imgHeart = document.createElement('img');
       imgHeart.setAttribute('id', 'img-heart');
-      imgHeart.src = '../imgs/heart.png';
+      imgHeart.src = heartIcon;
       divActions.appendChild(imgHeart);
 
       const likes = doc.data().likes;
@@ -132,12 +137,12 @@ export const renderWall = (navigateTo) => {
 
       const imgDelete = document.createElement('img');
       imgDelete.setAttribute('id', 'img-delete');
-      imgDelete.src = '../imgs/delete.png';
+      imgDelete.src = deleteIcon;
       divActions.appendChild(imgDelete);
       imgDelete.addEventListener('click', () => {
         if (email === currentEmail) {
           if (window.confirm('Este post irá a la caja de arena, seguro que deseas eliminarlo?')) {
-            const postId = doc.id; 
+            const postId = doc.id;
             deletePost(postId).then(() => {
               liCard.remove();
             }).catch((error) => {
